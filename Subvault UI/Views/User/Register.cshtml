@@ -1,0 +1,53 @@
+﻿@model Subvault_UI.Models.RegisteringUser
+
+@{
+    ViewBag.Title = "Register";
+}
+
+<div id="register-area" class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+    <h1>Register new user</h1>
+    <p>By creating an account on Subvault you can access its unique features.</p>
+    @using (Html.BeginForm("Register", "User")) {
+        <div class="col-xs-4">
+            <label>Username</label>
+        </div>
+        <div class="col-xs-8">
+            @Html.TextBoxFor(u => u.Username)
+
+            @if (ViewBag.UserAlreadyExists != null || !ViewData.ModelState.IsValidField("Username")) {
+                <div class="input-error-message"><i class="fa fa-exclamation-circle" aria-hidden="true"></i>  @Html.ValidationMessageFor(u => u.Username)@ViewBag.UserAlreadyExists</div>
+            }
+        </div>
+        <div class="col-xs-4">
+            <label>Password</label>
+        </div>
+        <div class="col-xs-8">
+            @Html.TextBoxFor(u => u.Password, new { @type = "password" })
+            @if (!ViewData.ModelState.IsValidField("Password")) {
+                <div class="input-error-message"><i class="fa fa-exclamation-circle" aria-hidden="true"></i>  @Html.ValidationMessageFor(u => u.Password)</div>
+            }
+        </div>
+        <div class="col-xs-4">
+            <label>Repeat password</label>
+        </div>
+        <div class="col-xs-8">
+            @Html.TextBoxFor(u => u.PasswordRepeat, new { @type = "password" })
+
+            @if (ViewBag.PasswordRepeatNotTheSame != null || !ViewData.ModelState.IsValidField("PasswordRepeat")) {
+                <div class="input-error-message"><i class="fa fa-exclamation-circle" aria-hidden="true"></i>  @Html.ValidationMessageFor(u => u.PasswordRepeat)@ViewBag.PasswordRepeatNotTheSame</div>
+            }
+        </div>
+        <div class="col-xs-4">
+            <label>Email</label>
+        </div>
+        <div class="col-xs-8">
+            @Html.TextBoxFor(u => u.EmailAddress)
+            @if (!ViewData.ModelState.IsValidField("EmailAddress")) {
+                <div class="input-error-message"><i class="fa fa-exclamation-circle" aria-hidden="true"></i>  @Html.ValidationMessageFor(u => u.EmailAddress)</div>
+            }
+        </div>
+        <div class="col-xs-4 col-xs-offset-8">
+            <button type="submit" class="green-button">Register</button>
+        </div>
+    }
+</div>

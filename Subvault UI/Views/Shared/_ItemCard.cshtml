@@ -1,0 +1,14 @@
+﻿@using Subvault_Domain
+
+@model Subvault_Domain.Entities.Item
+
+<div class="item-card">
+    <div class="poster">
+        <img src="@GlobalSettings.APIImageRoot/w@(GlobalSettings.ItemCardPosterWidth)@(Model.PosterURL)" />
+    </div>
+    <div class="info">
+        <h2>@Model.Title</h2>
+        <div class="subtitle-icon"><i class="fa fa-cc" aria-hidden="true"></i></div><div class="available-languages"><p>English, Dutch, Spanish, French...</p></div>
+        <button class="green-button">Subtitles <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
+    </div>
+</div>

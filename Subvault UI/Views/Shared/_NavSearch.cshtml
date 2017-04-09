@@ -1,0 +1,8 @@
+﻿@model Subvault_UI.Models.SearchQuery
+
+<div id="search-area">
+    @using (Html.BeginForm("Search", "Search", FormMethod.Get)) {
+        @Html.TextBoxFor(searchQuery => searchQuery.Title, new { placeholder = "Search..." })
+        <button type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+    }
+</div>

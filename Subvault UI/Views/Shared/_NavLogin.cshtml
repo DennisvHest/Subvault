@@ -1,0 +1,24 @@
+﻿@model Subvault_UI.Models.LoginViewModel
+
+<div id="nav-login-register">
+    <div id="nav-login">
+        <h4><i class="fa fa-user" aria-hidden="true"></i>  Login or Register</h4>
+        @using (Html.BeginForm("Login", "User")) {
+
+            if (TempData["UsernameOrPasswordIncorrect"] != null) {
+                <div class="input-error-message"><i class="fa fa-exclamation-circle" aria-hidden="true"></i>  Either the username or password was incorrect.</div>
+            }
+
+            @Html.TextBoxFor(u => u.Username, new { @placeholder = "Username" })
+            if (TempData["UserDoesNotExist"] != null) {
+                <div class="input-error-message"><i class="fa fa-exclamation-circle" aria-hidden="true"></i>  @TempData["UserDoesNotExist"]</div>
+            }
+            @Html.TextBoxFor(u => u.Password, new { @placeholder = "Password", @type = "password" })
+            <button type="submit" class="green-button">Login</button>
+        }
+    </div>
+    <div id="nav-register">
+        <p>Don't have an account?</p>
+        <a href="@Url.Action("Register", "User")"><button class="green-button">Register</button></a>
+    </div>
+</div>

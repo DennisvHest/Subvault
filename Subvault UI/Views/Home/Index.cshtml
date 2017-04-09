@@ -1,0 +1,20 @@
+﻿@model Subvault_UI.Models.IndexViewModel
+@using Subvault_Domain.Entities
+
+@{
+    ViewBag.Title = "Welcome";
+}
+
+<nav id="top-nav">
+    <button class="active">Movies</button>
+    <button>Series</button>
+</nav>
+
+<div id="popular">
+    <h1>Popular movies with subtitles</h1>
+    <div class="item-container">
+        @foreach (Movie movie in Model.PopularMovies) {
+            @Html.Partial("_ItemBox", @movie)
+        }
+    </div>
+</div>

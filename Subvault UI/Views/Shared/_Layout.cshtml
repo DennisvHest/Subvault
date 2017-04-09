@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>@ViewBag.Title - Subvault</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="~/Content/bootstrap.css" rel="stylesheet" type="text/css" />
+
+    <!-- Custom CSS -->
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat|Raleway:400,900" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="~/Content/font-awesome.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <nav id="side-nav">
+        <a href="/">
+            <div id="logo-area">
+                <h1><span>Sub</span>vault</h1>
+            </div>
+        </a>
+
+        @Html.Partial("_NavSearch", new Subvault_UI.Models.SearchQuery())
+
+        @if (Session["Login"] == null) {
+            if (TempData["Login"] != null) {
+                @Html.Partial("_NavLogin", TempData["Login"]);
+            } else {
+                @Html.Partial("_NavLogin", new Subvault_UI.Models.LoginViewModel());
+            }
+        } else {
+            @Html.Partial("_NavUser", Session["Login"])
+        }
+
+    </nav>
+
+    <div id="content">
+        @RenderBody()
+    </div>
+</body>
+</html>

@@ -1,0 +1,20 @@
+﻿@using Subvault_Domain.Entities
+
+@model Subvault_UI.Models.SearchResultsViewModel
+
+@{
+    ViewBag.Title = "Search Results";
+}
+
+<div id="search-results">
+    <h1>Search results for <span>'@Model.Title'</span></h1>
+    @if (Model.FoundItems.Count() != 0) {
+        <div class="item-container">
+            @foreach (Movie movie in Model.FoundItems) {
+                @Html.Partial("_ItemCard", movie)
+            }
+        </div>
+    } else {
+        <h4>No movies or series have been found with those criteria...</h4>
+    }
+</div>
