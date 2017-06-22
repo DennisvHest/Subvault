@@ -17,9 +17,11 @@ namespace Subvault_UI.Controllers {
             TempData["Login"] = login;
 
             try {
+                //If the password is correct
                 if (!userManager.AuthenticateUser(login.Username, login.Password)) {
                     TempData["UsernameOrPasswordIncorrect"] = true;
                 } else {
+                    //Set login session
                     Session["Login"] = userManager.GetUserSession(login.Username);
                 }
             } catch (UserDoesNotExistException udnee) {
@@ -27,6 +29,14 @@ namespace Subvault_UI.Controllers {
             }
 
             Response.Redirect(Request.UrlReferrer.ToString());
+        }
+
+        public void Logout() {
+            //Set login session to null
+            Session["Login"] = null;
+
+            //Return to home
+            Response.Redirect("/");
         }
 
         [HttpGet]

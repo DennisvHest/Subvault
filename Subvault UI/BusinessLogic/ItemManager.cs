@@ -59,5 +59,9 @@ namespace Subvault_UI.BusinessLogic {
                 Title = query.Title
             };
         }
+
+        public IEnumerable<Item> Search(string query) {
+            return itemRepo.SearchItemsByTitle(query);
+        }
     }
 }

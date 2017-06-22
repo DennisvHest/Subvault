@@ -12,6 +12,9 @@ namespace Subvault_Domain.Entities {
         public string Language { get; set; }
         public string FilePath { get; set; }
 
+        //Foreign key to User
+        public virtual User Uploader { get; set; }
+
         //Foreign key to Movie
         public virtual ICollection<Movie> Items { get; set; }
     }

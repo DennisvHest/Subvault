@@ -1,0 +1,30 @@
+﻿@{
+    ViewBag.Title = "Upload subtitles";
+}
+
+<div id="upload-area" class="col-xs-8 col-xs-offset-2">
+    <div id="item-select" class="upload-step col-xs-7">
+        <h3><div class="step-number">1</div>Select a movie or series</h3>
+        <input id="upload-search-input" type="text" placeholder="Search a movie or series..." />
+        <button id="upload-search-button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+
+        <div id="upload-search-results"></div>
+    </div>
+    <div id="subtitle-upload" class="upload-step col-xs-5">
+        <h3><div class="step-number">2</div>Upload subtitles</h3>
+        <input id="subtitles-input" type="file" accept=".srt">
+        <label for="subtitles-input">Choose a file...</label>
+    </div>
+    <div id="meta-data-area" class="upload-step col-xs-5">
+        <h3><div class="step-number">3</div>Specify additional information</h3>
+        <label>Language</label>
+        <select>
+            <option value="English">English</option>
+            <option value="Dutch">Dutch</option>
+            <option value="Spanish">Spanish</option>
+            <option value="French">French</option>
+        </select>
+    </div>
+</div>
+
+<script src="~/Scripts/upload.js"></script>

@@ -19,17 +19,19 @@ h1, h2, h3 {
     font-weight: 900;
 }
 
-.green-button {
+button, #subtitles-input + label {
     background-color: #237F6E;
     width: 100%;
     height: 40px;
 }
 
-.green-button:hover {
+button:hover, #subtitles-input + label:hover {
     background-color: #165045;
+    cursor: pointer;
+    cursor: hand;
 }
 
-.green-button:active {
+button:active {
     background-color: #103c35;
 }
 
@@ -39,6 +41,18 @@ input[type="text"], input[type="password"] {
     border-width: 0px;
 }
 
+input[type="text"], input[type="password"] {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+input[type="text"]:focus, input[type="password"]:focus {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+#search-area button:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
 label {
     font-family: 'Montserrat', sans-serif;
 }
@@ -46,6 +60,20 @@ label {
 .input-error-message {
     color: #e6b800;
     text-align: center;
+}
+
+.loader {
+    border: 8px solid rgba(255, 255, 255, 0.1);
+    border-top: 8px solid #237F6E;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
 /* Side nav */
@@ -87,7 +115,11 @@ label {
     overflow: auto;
 }
 
-input, #search-area button {
+#search-area input[type="text"] {
+    border-bottom: 0px;
+}
+
+input, #search-area button, #upload-search-button {
     background-color: transparent;
     height: 50px;
     width: 150px;
@@ -96,10 +128,6 @@ input, #search-area button {
 #search-area button {
     width: 50px;
     float: right;
-}
-
-#search-area button:hover {
-    background-color: rgba(0, 0, 0, 0.2);
 }
 
 #nav-login-register {
@@ -121,10 +149,7 @@ input, #search-area button {
     width: 100%;
 }
 
-#nav-login-register input[type="text"]:focus, 
-#nav-login-register input[type="password"]:focus, 
-#register-area input[type="text"]:focus, 
-#register-area input[type="password"]:focus {
+#nav-login-register input[type="text"]:focus, #nav-login-register input[type="password"]:focus {
     border-bottom: 1px solid rgba(255, 255, 255, 0.8);
 }
 
@@ -145,18 +170,25 @@ input, #search-area button {
     border-top: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-#nav-register button {
+.transparent-button {
     background-color: transparent;
     border: 1px solid rgba(255, 255, 255, 0.5);
 }
 
-#nav-register button:hover {
+.transparent-button:hover {
     background-color: #237F6E;
     border: 1px solid #237F6E;
 }
 
 #nav-register button:active {
     background-color: #103c35;
+}
+
+#nav-user {
+    bottom: 0px;
+    position: absolute;
+    width: 100%;
+    padding: 10px;
 }
 
 /* Content */
@@ -179,6 +211,7 @@ input, #search-area button {
     color: white;
     margin-top: 22px;
     border-bottom: 3px solid transparent;
+    width: initial;
 }
 
 #top-nav button:focus {
@@ -314,4 +347,107 @@ input, #search-area button {
 
 #register-area .input-error-message {
     margin-top: 50px;
+}
+
+/* Upload */
+#upload-area {
+    padding: 20px;
+    height: 100vh;
+}
+
+.upload-step {
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 0 20px 0 20px;
+}
+
+#item-select {
+    height: 100%;
+}
+
+#subtitle-upload, #meta-data-area {
+    display: none;
+    float: right;
+}
+
+.step-number {
+    background-color: white;
+    color: #23272E;
+    border-radius: 100%;
+    width: 26px;
+    height: 26px;
+    display: inline-block;
+    text-align: center;
+    margin-right: 10px;
+}
+
+#item-select input[type="text"] {
+    width: 90%;
+}
+
+#item-select #upload-search-button {
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+}
+
+#upload-search-button:hover {
+    background-color: #237F6E;
+}
+
+#upload-search-button:active {
+    background-color: #103c35;
+}
+
+#item-select .loader {
+    margin: 0 auto;
+    margin-top: 20px;
+}
+
+#item-select .item-card {
+    width: 100%;
+    margin: 0px;
+    margin-top: 10px;
+}
+
+#item-select .item-card:hover {
+    background-color: #2c313a;
+    cursor: pointer;
+    cursor: hand;
+}
+
+#item-select .item-card .poster {
+    height: 100px;
+    width: 60px;
+}
+
+#item-select .item-card img {
+    height: 100px;
+}
+
+#item-select .item-card .info {
+    height: 100px;
+    width: 80%;
+}
+
+.item-card.active {
+    background-color: #424957;
+}
+
+#subtitles-input {
+    width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+#subtitles-input + label {
+    text-align: center;
+    font-weight: normal;
+    font-family: 'Raleway', sans-serif;
+    padding: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
