@@ -7,13 +7,13 @@ namespace Subvault_Domain.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class Subtitlesadded : IMigrationMetadata
+    public sealed partial class Itemadditionalattributesadded : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Subtitlesadded));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Itemadditionalattributesadded));
         
         string IMigrationMetadata.Id
         {
-            get { return "201703181046271_Subtitles added"; }
+            get { return "201706271403399_Item additional attributes added"; }
         }
         
         string IMigrationMetadata.Source

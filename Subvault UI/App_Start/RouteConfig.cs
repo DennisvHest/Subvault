@@ -14,6 +14,12 @@ namespace Subvault_UI
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                name: null,
+                url: "Movie/{id}",
+                defaults: new { controller = "Movie", action = "Detail" }
+            );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }

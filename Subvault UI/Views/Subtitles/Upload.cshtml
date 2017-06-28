@@ -1,30 +1,66 @@
-﻿@{
+﻿@using System.Web.UI.WebControls
+@using System.Web.Mvc
+
+@model Subvault_Domain.Entities.Subtitles
+
+@{
     ViewBag.Title = "Upload subtitles";
+
+    var listItems = new List<ListItem> {
+        new ListItem { Text = "English", Value="English" },
+        new ListItem { Text = "French", Value="French" },
+        new ListItem { Text = "Spanish", Value="Spanish" },
+        new ListItem { Text = "Dutch", Value="Dutch" }
+  };
 }
 
-<div id="upload-area" class="col-xs-8 col-xs-offset-2">
-    <div id="item-select" class="upload-step col-xs-7">
-        <h3><div class="step-number">1</div>Select a movie or series</h3>
-        <input id="upload-search-input" type="text" placeholder="Search a movie or series..." />
-        <button id="upload-search-button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+<div id="upload-area" class="col-md-12 col-lg-10 col-lg-offset-1 col-xl-8 col-xl-offset-2">
+    @using (Html.BeginForm("Upload", "Subtitles", FormMethod.Post, new { enctype = "multipart/form-data", @onkeypress = "return event.keyCode != 13;" })) {
+        <div id="item-select" class="upload-step col-xs-12 col-md-7">
+            <h3><div class="step-number">1</div>Select a movie or series</h3>
+            <input id="upload-search-input" type="text" placeholder="Search a movie or series..." />
+            <button id="upload-search-button" type="button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
 
-        <div id="upload-search-results"></div>
-    </div>
-    <div id="subtitle-upload" class="upload-step col-xs-5">
-        <h3><div class="step-number">2</div>Upload subtitles</h3>
-        <input id="subtitles-input" type="file" accept=".srt">
-        <label for="subtitles-input">Choose a file...</label>
-    </div>
-    <div id="meta-data-area" class="upload-step col-xs-5">
-        <h3><div class="step-number">3</div>Specify additional information</h3>
-        <label>Language</label>
-        <select>
-            <option value="English">English</option>
-            <option value="Dutch">Dutch</option>
-            <option value="Spanish">Spanish</option>
-            <option value="French">French</option>
-        </select>
-    </div>
+            <div id="upload-search-results"></div>
+            @Html.Hidden("movieId")
+        </div>
+        <div id="subtitle-upload" class="upload-step col-xs-12 col-md-5">
+            <h3><div class="step-number">2</div>Upload subtitles</h3>
+            <input id="subtitles-input" type="file" name="file" accept=".srt">
+            <label for="subtitles-input">Choose a file...</label>
+        </div>
+        <div id="meta-data-area" class="upload-step col-xs-12 col-md-5">
+            <h3><div class="step-number">3</div>Specify additional information</h3>
+            <label class="sub-spec-label">Language</label>
+            @Html.DropDownListFor(s => s.Language, new SelectList(listItems))
+            <label class="sub-spec-label">Synced with</label>
+            <div class="sync-type col-xs-3">
+                @Html.RadioButtonFor(s => s.SyncType, "Bluray", new { @id = "bluray-radio" })
+                <label for="bluray-radio"><span></span><br />Bluray</label>
+            </div>
+            <div class="sync-type col-xs-3">
+                @Html.RadioButtonFor(s => s.SyncType, "DVD", new { @id = "dvd-radio" })
+                <label for="dvd-radio"><span></span><br />DVD</label>
+            </div>
+            <div class="sync-type col-xs-3">
+                @Html.RadioButtonFor(s => s.SyncType, "Web", new { @id = "web-radio" })
+                <label for="web-radio"><span></span><br />Web</label>
+            </div>
+            <div class="sync-type col-xs-3">
+                @Html.RadioButtonFor(s => s.SyncType, "Other", new { @id = "other-radio", @checked = "true" })
+                <label for="other-radio"><span></span><br />Other</label>
+            </div>
+            <div class="col-xs-12">
+                @Html.CheckBoxFor(s => s.ForHearingImpaired, new { @id = "hearing-impaired-checkbox" })
+                <label class="sub-spec-label" for="hearing-impaired-checkbox">For hearing impaired <span class="spec-checkbox"></span></label>
+            </div>
+            <div class="col-xs-12">
+                @Html.CheckBoxFor(s => s.IsForeignOnly, new { @id = "foreign-only-checkbox" })
+                <label class="sub-spec-label" for="foreign-only-checkbox">Foreign parts only <span class="spec-checkbox"></span></label>
+            </div>
+            <button type="submit" class="green-button">Upload</button>
+        </div>
+    }
 </div>
 
 <script src="~/Scripts/upload.js"></script>

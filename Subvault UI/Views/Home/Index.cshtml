@@ -6,6 +6,9 @@
 }
 
 <nav id="top-nav">
+    @if (TempData["upload-success"] != null) {
+        <div class="success-banner"><p>The subtitles were successfully uploaded.</p></div>
+    }
     <button class="active">Movies</button>
     <button>Series</button>
 </nav>

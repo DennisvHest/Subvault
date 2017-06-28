@@ -36,9 +36,12 @@ namespace Subvault_UI.Infrastructure {
             kernel.Bind<IItemRepository>().To<ItemRepository>();
             kernel.Bind<IItemAPIRepository>().To<ItemAPIRepository>();
             kernel.Bind<IUserRepository>().To<UserRepository>();
+            kernel.Bind<ISubtitlesRepository>().To<SubtitlesRepository>();
 
             kernel.Bind<ItemManager>().To<ItemManager>();
             kernel.Bind<UserManager>().To<UserManager>();
+            kernel.Bind<SubtitlesManager>().To<SubtitlesManager>();
+            kernel.Bind<FileManager>().To<FileManager>();
         }
     }
 }

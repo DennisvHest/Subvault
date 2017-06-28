@@ -186,6 +186,7 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\mobile-nav.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\upload.js" />
     <Content Include="Web.config" />
@@ -195,9 +196,12 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="BusinessLogic\FileManager.cs" />
+    <Compile Include="BusinessLogic\SubtitlesManager.cs" />
     <Compile Include="BusinessLogic\UserManager.cs" />
     <Compile Include="BusinessLogic\ItemManager.cs" />
     <Compile Include="Controllers\APIController.cs" />
+    <Compile Include="Controllers\MovieController.cs" />
     <Compile Include="Controllers\SubtitlesController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -207,7 +211,9 @@
     </Compile>
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
     <Compile Include="Models\IndexViewModel.cs" />
+    <Compile Include="Models\ItemAPIModel.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
+    <Compile Include="Models\MovieViewModel.cs" />
     <Compile Include="Models\RegisteringUser.cs" />
     <Compile Include="Models\SearchQuery.cs" />
     <Compile Include="Models\SearchResultsViewModel.cs" />
@@ -233,6 +239,7 @@
     <Content Include="Views\User\Register.cshtml" />
     <Content Include="Views\Shared\_NavUser.cshtml" />
     <Content Include="Views\Subtitles\Upload.cshtml" />
+    <Content Include="Views\Movie\Detail.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

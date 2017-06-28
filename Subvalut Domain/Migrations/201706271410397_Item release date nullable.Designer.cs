@@ -7,13 +7,13 @@ namespace Subvault_Domain.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class Subtitleslinkedtouser : IMigrationMetadata
+    public sealed partial class Itemreleasedatenullable : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Subtitleslinkedtouser));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Itemreleasedatenullable));
         
         string IMigrationMetadata.Id
         {
-            get { return "201704091340405_Subtitles linked to user"; }
+            get { return "201706271410397_Item release date nullable"; }
         }
         
         string IMigrationMetadata.Source

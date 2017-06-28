@@ -8,6 +8,7 @@ using Subvault_Domain.Entities;
 using Subvault_Domain.ObjectMappers;
 using Subvault_UI.Models;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -50,6 +51,18 @@ namespace Subvault_UI.BusinessLogic {
             return indexViewModel;
         }
 
+        public MovieViewModel GetMovieById(int id) {
+            Movie movie = itemRepo.GetMovieById(id);
+
+            return new MovieViewModel {
+                Title = movie.Title,
+                Description = movie.Description,
+                ReleaseDate = movie.ReleaseDate,
+                PosterURL = movie.PosterURL,
+                BackdropURL = movie.BackdropURL
+            };
+        }
+
         /* Author: Dennis van Hest
          * Returns the view model with the search results from the search query
          */
@@ -60,8 +73,22 @@ namespace Subvault_UI.BusinessLogic {
             };
         }
 
-        public IEnumerable<Item> Search(string query) {
-            return itemRepo.SearchItemsByTitle(query);
+        public IEnumerable<ItemAPIModel> Search(string query) {
+            List<ItemAPIModel> itemList = new List<ItemAPIModel>();
+
+            IEnumerable<Item> result = itemRepo.SearchItemsByTitle(query);
+
+            foreach (Item item in result) {
+                ItemAPIModel itemApiModel = new ItemAPIModel {
+                    Id = item.Id,
+                    Title = item.Title,
+                    PosterURL = item.PosterURL
+                };
+
+                itemList.Add(itemApiModel);
+            }
+
+            return itemList;
         }
     }
 }

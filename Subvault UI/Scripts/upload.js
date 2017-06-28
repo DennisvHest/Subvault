@@ -25,6 +25,8 @@ var searchItems = function () {
         //Empty the results
         $('#upload-search-results').empty();
 
+        console.log(jqXHR);
+
         //Get the items from the response
         var items = jqXHR.responseJSON;
 
@@ -51,6 +53,10 @@ var searchItems = function () {
         //On item clicked
         $('.item-card').click(function (event) {
             selectedItemId = $(this).data("id");
+            $('#movieId').val(selectedItemId);
+            $('#upload-search-results').children().each(function () {
+                $(this).removeClass("active");
+            });
             $(this).addClass("active");
             $('#subtitle-upload').fadeIn('fast');
         });

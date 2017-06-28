@@ -14,7 +14,7 @@ button:focus, input[type="submit"]:focus {
     outline-width: 0;
 }
 
-h1, h2, h3 {
+h1, h2, h3, h4 {
     font-family: 'Montserrat', sans-serif;
     font-weight: 900;
 }
@@ -74,6 +74,69 @@ label {
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+
+select {
+    background-color: rgba(255, 255, 255, 0.1);
+    font-family: 'Raleway', sans-serif;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    outline: none;
+}
+
+option {
+    background-color: #23272E;
+}
+
+input[type="radio"], input[type="checkbox"] {
+    display: none;
+}
+
+input[type="radio"] + label span, input[type="checkbox"] ~ label span {
+    display: inline-block;
+    width: 19px;
+    height: 19px;
+    margin: -1px 4px 0 0;
+    vertical-align: middle;
+    cursor: pointer;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+}
+
+input[type="checkbox"] ~ label span {
+    border-radius: 1px;
+}
+
+input[type="radio"] + label span, input[type="checkbox"] ~ label span {
+     background-color: rgba(255, 255, 255, 0.3);
+}
+
+input[type="radio"]:checked + label span, input[type="checkbox"]:checked ~ label span {
+     background-color: #237F6E;
+}
+
+.success-banner {
+    width: 100%;
+    background-color: #237F6E;
+    height: 30px;
+    line-height: 30px;
+    margin: 0px auto;
+}
+
+/* Mobile nav */
+#mobile-nav {
+    width: 100%;
+    height: 61px;
+    position: fixed;
+    margin-top: -61px;
+}
+
+#mobile-nav button {
+    width: 61px;
+    height: 61px;
+    float: left;
+    font-size: 30px;
 }
 
 /* Side nav */
@@ -191,6 +254,10 @@ input, #search-area button, #upload-search-button {
     padding: 10px;
 }
 
+#nav-user button {
+    margin-bottom: 10px;
+}
+
 /* Content */
 #content {
     margin-left: 220px;
@@ -198,7 +265,6 @@ input, #search-area button, #upload-search-button {
 
 /* Top nav */
 #top-nav {
-    height: 61px;
     text-align: center;
 }
 
@@ -355,9 +421,18 @@ input, #search-area button, #upload-search-button {
     height: 100vh;
 }
 
+#upload-area form {
+    display: inline;
+}
+
 .upload-step {
     background-color: rgba(0, 0, 0, 0.3);
-    padding: 0 20px 0 20px;
+    padding: 20px;
+    border: 10px solid #23272E;
+}
+
+.upload-step h3 {
+    margin: 10px 0;
 }
 
 #item-select {
@@ -450,4 +525,117 @@ input, #search-area button, #upload-search-button {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+}
+
+#meta-data-area div {
+    padding: 0px;
+}
+
+#meta-data-area label {
+    width: 100%;
+}
+
+.sub-spec-label{
+    width: 100%;
+    margin: 10px 0px;
+}
+
+.sync-type {
+    padding: 0px;
+    text-align: center;
+}
+
+.spec-checkbox {
+    float: right;
+}
+
+/* Item detail */
+#item-detail {
+    padding: 0px;
+    padding-bottom: 30px;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+#item-detail-backdrop, #backdrop-gradient {
+    width: 100%;
+    height: 300px;
+    position: absolute;
+}
+
+#item-detail-backdrop {
+	background-size: cover;
+    background-position: center center;
+	background-repeat: no-repeat;
+}
+
+#backdrop-gradient {
+    background: linear-gradient(transparent, #15171c);
+}
+
+#item-detail-backdrop img {
+    position: absolute;
+    height: 80%;
+    margin-left: 10px;
+    border: 5px solid white;
+    float: left;
+    top: 50%;
+    transform: translateY(-50%);
+    box-shadow: 2px 2px 10px grey;
+    z-index: 1;
+}
+
+#item-detail h1 {
+    position: absolute;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    margin-left: 200px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 5vw;
+    width: calc(100% - 200px);
+    float: left;
+    z-index: 1;
+}
+
+#item-detail-box {
+    margin-top: 300px;
+}
+
+#item-detail-text {
+    padding: 10px;
+}
+
+/* Device rules */
+@media (max-width: 767px) {
+    /* XS */
+    #content {
+        margin-left: 0px;
+        margin-top: 61px;
+    }
+
+    #popular {
+        padding: 0px;
+    }
+
+    #side-nav {
+        display: none;
+        margin-top: 61px;
+        background-color: rgba(0, 0, 0, 0.9);
+        height: calc(100% - 61px);
+    }
+
+    #item-detail-backdrop, #backdrop-gradient {
+        height: 200px;
+    }
+
+    #item-detail-backdrop h1 {
+        font-size: 12vw;
+    }
+}
+
+@media (min-width: 768px) {
+    /* XS+ */
+    #side-nav {
+        display: block !important;
+    }
 }

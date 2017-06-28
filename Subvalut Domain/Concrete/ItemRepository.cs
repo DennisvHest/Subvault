@@ -15,6 +15,16 @@ namespace Subvault_Domain.Concrete {
             this.context = context;
         }
 
+        /// <summary>
+        /// Returns a Movie object with a given id
+        /// </summary>
+        /// <param name="id">The id of the movie</param>
+        /// <returns>A Movie with the given id</returns>
+        public Movie GetMovieById(int id) {
+            return (Movie) context.Items
+                .Where(m => m.Id == id).FirstOrDefault();
+        }
+
         /* Author: Dennis van Hest
          * Returns a list of items that contain the title string
          */

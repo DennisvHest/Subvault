@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>@ViewBag.Title - Subvault</title>
-    
+
     <!-- Bootstrap CSS -->
     <link href="~/Content/bootstrap.css" rel="stylesheet" type="text/css" />
 
@@ -20,10 +20,20 @@
 
     <!-- jQuery -->
     <script src="~/Scripts/jquery-1.10.2.js"></script>
+
+    <script src="~/Scripts/mobile-nav.js"></script>
 </head>
 <body>
-    <nav id="side-nav">
+    <nav id="mobile-nav" class="hidden-sm hidden-md hidden-lg hidden-xl">
+        <button><i class="fa fa-bars" aria-hidden="true"></i></button>
         <a href="/">
+            <div id="logo-area">
+                <h1><span>Sub</span>vault</h1>
+            </div>
+        </a>
+    </nav>
+    <nav id="side-nav">
+        <a href="/" class="hidden-xs">
             <div id="logo-area">
                 <h1><span>Sub</span>vault</h1>
             </div>

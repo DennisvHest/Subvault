@@ -67,12 +67,14 @@
   <ItemGroup>
     <Compile Include="Abstract\IItemAPIRepository.cs" />
     <Compile Include="Abstract\IItemRepository.cs" />
+    <Compile Include="Abstract\ISubtitlesRepository.cs" />
     <Compile Include="Abstract\IUserRepository.cs" />
     <Compile Include="APIEntities\MovieResult.cs" />
     <Compile Include="APIEntities\PopularMoviesRoot.cs" />
     <Compile Include="Concrete\EFDbContext.cs" />
     <Compile Include="Concrete\ItemRepository.cs" />
     <Compile Include="Concrete\ItemAPIRepository.cs" />
+    <Compile Include="Concrete\SubtitlesRepository.cs" />
     <Compile Include="Concrete\UserRepository.cs" />
     <Compile Include="Entities\Item.cs" />
     <Compile Include="Entities\Movie.cs" />
@@ -82,17 +84,17 @@
     <Compile Include="Exceptions\UserAlreadyExistsException.cs" />
     <Compile Include="Exceptions\UserDoesNotExistException.cs" />
     <Compile Include="GlobalSettings.cs" />
-    <Compile Include="Migrations\201703181046271_Subtitles added.cs" />
-    <Compile Include="Migrations\201703181046271_Subtitles added.Designer.cs">
-      <DependentUpon>201703181046271_Subtitles added.cs</DependentUpon>
+    <Compile Include="Migrations\201706261021412_Refresh.cs" />
+    <Compile Include="Migrations\201706261021412_Refresh.Designer.cs">
+      <DependentUpon>201706261021412_Refresh.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201703181512142_Users added.cs" />
-    <Compile Include="Migrations\201703181512142_Users added.Designer.cs">
-      <DependentUpon>201703181512142_Users added.cs</DependentUpon>
+    <Compile Include="Migrations\201706271403399_Item additional attributes added.cs" />
+    <Compile Include="Migrations\201706271403399_Item additional attributes added.Designer.cs">
+      <DependentUpon>201706271403399_Item additional attributes added.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201704091340405_Subtitles linked to user.cs" />
-    <Compile Include="Migrations\201704091340405_Subtitles linked to user.Designer.cs">
-      <DependentUpon>201704091340405_Subtitles linked to user.cs</DependentUpon>
+    <Compile Include="Migrations\201706271410397_Item release date nullable.cs" />
+    <Compile Include="Migrations\201706271410397_Item release date nullable.Designer.cs">
+      <DependentUpon>201706271410397_Item release date nullable.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ObjectMappers\APIMovieMapper.cs" />
@@ -103,14 +105,14 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201703181046271_Subtitles added.resx">
-      <DependentUpon>201703181046271_Subtitles added.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201706261021412_Refresh.resx">
+      <DependentUpon>201706261021412_Refresh.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703181512142_Users added.resx">
-      <DependentUpon>201703181512142_Users added.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201706271403399_Item additional attributes added.resx">
+      <DependentUpon>201706271403399_Item additional attributes added.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201704091340405_Subtitles linked to user.resx">
-      <DependentUpon>201704091340405_Subtitles linked to user.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201706271410397_Item release date nullable.resx">
+      <DependentUpon>201706271410397_Item release date nullable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

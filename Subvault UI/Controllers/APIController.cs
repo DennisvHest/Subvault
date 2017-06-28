@@ -1,5 +1,6 @@
 ﻿using Subvault_Domain.Entities;
 using Subvault_UI.BusinessLogic;
+using Subvault_UI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,7 @@ namespace Subvault_UI.Controllers {
         }
 
         [HttpGet]
-        public Item[] Search(string query) {
+        public ItemAPIModel[] Search(string query) {
             return itemManager.Search(query).ToArray();
         }
     }

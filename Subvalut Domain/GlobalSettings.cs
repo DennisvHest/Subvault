@@ -13,5 +13,8 @@ namespace Subvault_Domain {
         public static string APIImageRoot = "https://image.tmdb.org/t/p";
         public static int ItemBoxPosterWidth = 185;
         public static int ItemCardPosterWidth = 154;
+        public static int ItemDetailPosterWidth = ItemBoxPosterWidth;
+        public static string ItemDetailBackdropWidth = "original";
+        public static string SubtitlesFileRoot = "~/subtitles/";
     }
 }
