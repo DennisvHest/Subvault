@@ -17,5 +17,8 @@ namespace Subvault_Domain.Entities {
         public DateTime? ReleaseDate { get; set; }
         public string PosterURL { get; set; }
         public string BackdropURL { get; set; }
+
+        //Many-to-many relation to Genre
+        public virtual ICollection<Genre> Genres { get; set; }
     }
 }

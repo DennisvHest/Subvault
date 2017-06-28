@@ -59,7 +59,8 @@ namespace Subvault_UI.BusinessLogic {
                 Description = movie.Description,
                 ReleaseDate = movie.ReleaseDate,
                 PosterURL = movie.PosterURL,
-                BackdropURL = movie.BackdropURL
+                BackdropURL = movie.BackdropURL,
+                Genres = movie.Genres
             };
         }
 

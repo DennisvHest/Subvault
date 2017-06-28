@@ -13,11 +13,6 @@ namespace Subvault_Domain.Concrete {
         public DbSet<Item> Items { get; set; }
         public DbSet<Subtitles> Subtitles { get; set; }
         public DbSet<User> Users { get; set; }
-
-        /*protected override void OnModelCreating(DbModelBuilder modelBuilder) {
-            modelBuilder.Entity<Subtitles>()
-                .HasRequired(s => s.Item)
-                .WithRequiredPrincipal();
-        }*/
+        public DbSet<Genre> Genres { get; set; }
     }
 }

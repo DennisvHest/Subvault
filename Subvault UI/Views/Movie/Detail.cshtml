@@ -20,12 +20,35 @@
     </div>
     <div id="backdrop-gradient"></div>
     <div id="item-detail-box" class="col-xs-12">
-        <div id="item-detail-text" class="detail-card col-xs-8 col-xs-offset-2">
-            @if (Model.ReleaseDate.HasValue) {
-                <p>@Model.ReleaseDate.Value.ToString("M-d-yyy")</p>
-            } else {
-                <p>No release date</p>
-            }
+        <div id="item-detail-text" class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+            <div id="item-detail-table">
+                <div class="col-xs-12 col-md-6 col-lg-4">
+                    <b>Release date</b>
+                    @if (Model.ReleaseDate.HasValue) {
+                        <p>@Model.ReleaseDate.Value.ToString("M-d-yyy")</p>
+                    } else {
+                        <p>No release date</p>
+                    }
+                </div>
+                <div class="col-xs-12 col-md-6 col-lg-4">
+                    <b>Genres</b>
+                    <p>
+                        @foreach (Subvault_Domain.Entities.Genre genre in Model.Genres) {
+                            @Html.Raw(genre.Name + ", ")
+                        }
+                        ...
+                    </p>
+                </div>
+                <div class="col-xs-12col-md-6 col-lg-4">
+                    <b>Directed by</b>
+                    <p>James Mangold</p>
+                </div>
+                <div class="col-xs-12 col-md-6 col-xs-12">
+                    <b>Cast</b>
+                    <p>Hugh Jackman, Patrick Stewart, Dafne Keen, Boyd Holbrook, Stephen Merchant...</p>
+                </div>
+            </div>
+            </table>
             <h4>Description</h4>
             <p>@Model.Description</p>
         </div>

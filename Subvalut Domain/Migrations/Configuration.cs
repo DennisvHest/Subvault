@@ -1,9 +1,8 @@
 namespace Subvault_Domain.Migrations {
     using Entities;
     using System;
-    using System.Data.Entity;
+    using System.Collections.Generic;
     using System.Data.Entity.Migrations;
-    using System.Linq;
 
     internal sealed class Configuration : DbMigrationsConfiguration<Subvault_Domain.Concrete.EFDbContext> {
         public Configuration() {
@@ -11,6 +10,13 @@ namespace Subvault_Domain.Migrations {
         }
 
         protected override void Seed(Subvault_Domain.Concrete.EFDbContext context) {
+            //Genres
+            context.Genres.RemoveRange(context.Genres);
+
+            Genre genre1 = new Genre { Id = 28, Name = "Action" };
+            Genre genre2 = new Genre { Id = 18, Name = "Drama" };
+            Genre genre3 = new Genre { Id = 878, Name = "Science Fiction" };
+
             //Items
             context.Items.RemoveRange(context.Items);
 
@@ -20,7 +26,8 @@ namespace Subvault_Domain.Migrations {
                 Description = "In the near future, a weary Logan cares for an ailing Professor X in a hideout on the Mexican border. But Logan's attempts to hide from the world and his legacy are upended when a young mutant arrives, pursued by dark forces.",
                 ReleaseDate = new DateTime(2017, 2, 28),
                 PosterURL = "/45Y1G5FEgttPAwjTYic6czC9xCn.jpg",
-                BackdropURL = "/5pAGnkFYSsFJ99ZxDIYnhQbQFXs.jpg"
+                BackdropURL = "/5pAGnkFYSsFJ99ZxDIYnhQbQFXs.jpg", 
+                Genres = new List<Genre> { genre1, genre2, genre3 }
             };
             Item movie2 = new Movie { Id = 341174, Title = "Fifty Shades Darker", PosterURL = "/aybgjbFbn6yUbsgUMnUbwc2jcWd.jpg" };
             Item movie3 = new Movie { Id = 127380, Title = "Finding Dory", PosterURL = "/z09QAf8WbZncbitewNk6lKYMZsh.jpg" };
