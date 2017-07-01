@@ -16,12 +16,25 @@ namespace Subvault_UI.Controllers {
             SubtitlesManager = subtitlesManager;
         }
 
+        /// <author>Dennis van Hest</author>
+        /// <summary>
+        /// Returns the view for uploading subtitles
+        /// </summary>
+        /// <returns>The view</returns>
         [HttpGet]
         [UserLoggedIn]
         public ViewResult Upload() {
             return View();
         }
 
+        /// <author>Dennis van Hest</author>
+        /// <summary>
+        /// Catches the request to upload subtitles
+        /// </summary>
+        /// <param name="subtitles">Subtitles data</param>
+        /// <param name="movieId">The id of the movie the subtitles belong to</param>
+        /// <param name="file">The subtitles file</param>
+        /// <returns>Redirects to the homepage</returns>
         [HttpPost]
         [UserLoggedIn]
         public ActionResult Upload(Subtitles subtitles, int movieId, HttpPostedFileBase file) {

@@ -13,6 +13,11 @@ namespace Subvault_UI.Controllers {
             this.userManager = userManager;
         }
 
+        /// <author>Dennis van Hest</author>
+        /// <summary>
+        /// Catches the login request and redirects back to the page the request came from
+        /// </summary>
+        /// <param name="login">Model containing the username and password</param>
         public void Login(LoginViewModel login) {
             TempData["Login"] = login;
 
@@ -31,6 +36,10 @@ namespace Subvault_UI.Controllers {
             Response.Redirect(Request.UrlReferrer.ToString());
         }
 
+        /// <author>Dennis van Hest</author>
+        /// <summary>
+        /// Logs out the user and redirects the user to the homepage
+        /// </summary>
         public void Logout() {
             //Set login session to null
             Session["Login"] = null;
@@ -39,11 +48,22 @@ namespace Subvault_UI.Controllers {
             Response.Redirect("/");
         }
 
+        /// <author>Dennis van Hest</author>
+        /// <summary>
+        /// Returns the view to register a user
+        /// </summary>
+        /// <returns>The view</returns>
         [HttpGet]
         public ViewResult Register() {
             return View();
         }
 
+        /// <author>Dennis van Hest</author>
+        /// <summary>
+        /// Catches the user register request
+        /// </summary>
+        /// <param name="registeringUser">The user to be registered</param>
+        /// <returns>The ThanksForRegistering view if everything is correct. Otherwise it will return to the register page.</returns>
         [HttpPost]
         public ViewResult Register(RegisteringUser registeringUser) {
             if (ModelState.IsValid) {

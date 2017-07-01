@@ -17,6 +17,16 @@ namespace Subvault_Domain.Migrations {
             Genre genre2 = new Genre { Id = 18, Name = "Drama" };
             Genre genre3 = new Genre { Id = 878, Name = "Science Fiction" };
 
+            //People
+            context.People.RemoveRange(context.People);
+
+            Person person1 = new Director { Id = 366, Name = "James Mangold" };
+            Person person2 = new CastMember { Id = 6968, Name = "Hugh Jackman" };
+            Person person3 = new CastMember { Id = 2387, Name = "Patrick Stewart" };
+            Person person4 = new CastMember { Id = 1464650, Name = "Dafne Keen" };
+            Person person5 = new CastMember { Id = 467645, Name = "Boyd Holbrook" };
+            Person person6 = new CastMember { Id = 39189, Name = "Stephen Merchant" };
+
             //Items
             context.Items.RemoveRange(context.Items);
 
@@ -27,7 +37,8 @@ namespace Subvault_Domain.Migrations {
                 ReleaseDate = new DateTime(2017, 2, 28),
                 PosterURL = "/45Y1G5FEgttPAwjTYic6czC9xCn.jpg",
                 BackdropURL = "/5pAGnkFYSsFJ99ZxDIYnhQbQFXs.jpg", 
-                Genres = new List<Genre> { genre1, genre2, genre3 }
+                Genres = new List<Genre> { genre1, genre2, genre3 },
+                People = new List<Person> { person1, person2, person3, person4, person5, person6 }
             };
             Item movie2 = new Movie { Id = 341174, Title = "Fifty Shades Darker", PosterURL = "/aybgjbFbn6yUbsgUMnUbwc2jcWd.jpg" };
             Item movie3 = new Movie { Id = 127380, Title = "Finding Dory", PosterURL = "/z09QAf8WbZncbitewNk6lKYMZsh.jpg" };

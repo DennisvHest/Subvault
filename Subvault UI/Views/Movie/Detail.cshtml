@@ -41,11 +41,24 @@
                 </div>
                 <div class="col-xs-12col-md-6 col-lg-4">
                     <b>Directed by</b>
-                    <p>James Mangold</p>
+                    <p>
+                        @for (int i = 0; i < Model.Directors.Count(); i++) {
+                            if (Model.Directors.Count() == 1 || i == Model.Directors.Count() - 1) {
+                                @Html.Raw(Model.Directors.ToArray()[i].Name)
+                            } else {
+                                @Html.Raw(Model.Directors.ToArray()[i].Name + ", ")
+                            }
+                        }
+                    </p>
                 </div>
                 <div class="col-xs-12 col-md-6 col-xs-12">
                     <b>Cast</b>
-                    <p>Hugh Jackman, Patrick Stewart, Dafne Keen, Boyd Holbrook, Stephen Merchant...</p>
+                    <p>
+                        @foreach (Subvault_Domain.Entities.CastMember castMember in Model.CastMembers) {
+                            @Html.Raw(castMember.Name + ", ")
+                        }
+                        ...
+                    </p>
                 </div>
             </div>
             </table>

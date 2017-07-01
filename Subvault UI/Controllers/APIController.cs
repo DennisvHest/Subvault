@@ -1,11 +1,6 @@
-﻿using Subvault_Domain.Entities;
-using Subvault_UI.BusinessLogic;
+﻿using Subvault_UI.BusinessLogic;
 using Subvault_UI.Models;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 
 namespace Subvault_UI.Controllers {
@@ -18,6 +13,12 @@ namespace Subvault_UI.Controllers {
             this.itemManager = itemManager;
         }
 
+        /// <author>Dennis van Hest</author>
+        /// <summary>
+        /// Returns a list of Items with containing the given query
+        /// </summary>
+        /// <param name="query">The query</param>
+        /// <returns>A list of ItemAPIModels</returns>
         [HttpGet]
         public ItemAPIModel[] Search(string query) {
             return itemManager.Search(query).ToArray();

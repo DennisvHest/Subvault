@@ -12,6 +12,12 @@ namespace Subvault_UI.Controllers {
             this.itemManager = itemManager;
         }
 
+        /// <author>Dennis van Hest</author>
+        /// <summary>
+        /// Returns the view for the search results from the given query
+        /// </summary>
+        /// <param name="query">The search query</param>
+        /// <returns>The view</returns>
         public ViewResult Search(SearchQuery query) {
             return View("SearchResults", itemManager.Search(query));
         }

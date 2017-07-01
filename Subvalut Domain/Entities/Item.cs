@@ -2,9 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Subvault_Domain.Entities {
 
@@ -20,5 +17,8 @@ namespace Subvault_Domain.Entities {
 
         //Many-to-many relation to Genre
         public virtual ICollection<Genre> Genres { get; set; }
+
+        //Many-to-many relation to Person
+        public virtual ICollection<Person> People { get; set; }
     }
 }

@@ -12,5 +12,7 @@ namespace Subvault_UI.Models {
         public string PosterURL { get; set; }
         public string BackdropURL { get; set; }
         public IEnumerable<Genre> Genres { get; set; }
+        public IEnumerable<CastMember> CastMembers { get; set; }
+        public IEnumerable<Director> Directors { get; set; }
     }
 }

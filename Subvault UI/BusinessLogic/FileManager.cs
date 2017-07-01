@@ -8,6 +8,13 @@ namespace Subvault_UI.BusinessLogic {
 
         public FileManager() { }
 
+        /// <author>Dennis van Hest</author>
+        /// <summary>
+        /// Saves the subtitles file into the given folder
+        /// </summary>
+        /// <param name="file">File to be saved</param>
+        /// <param name="folder">Forder in which the file will be saved</param>
+        /// <returns>The path to locate the saved file</returns>
         public string SaveSubtitlesInFolder(HttpPostedFileBase file, string folder) {
             //Create the folder if it does'nt already exist
             string folderPath = HttpContext.Current.Server.MapPath(GlobalSettings.SubtitlesFileRoot + folder);

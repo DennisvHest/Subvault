@@ -1,9 +1,6 @@
 ﻿using Subvault_Domain.Abstract;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Subvault_Domain.Entities;
 
 namespace Subvault_Domain.Concrete {
@@ -25,9 +22,12 @@ namespace Subvault_Domain.Concrete {
                 .Where(m => m.Id == id).FirstOrDefault();
         }
 
-        /* Author: Dennis van Hest
-         * Returns a list of items that contain the title string
-         */
+        /// <author>Dennis van Hest</author>
+        /// <summary>
+        /// Returns a list of items that contain the title string
+        /// </summary>
+        /// <param name="title">Title of the item</param>
+        /// <returns>List of Items</returns>
         public IEnumerable<Item> SearchItemsByTitle(string title) {
             return context.Items
                 .Where(i => i.Title.Contains(title));

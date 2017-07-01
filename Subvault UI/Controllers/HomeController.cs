@@ -1,8 +1,4 @@
 ﻿using Subvault_UI.BusinessLogic;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Subvault_UI.Controllers {
@@ -15,9 +11,11 @@ namespace Subvault_UI.Controllers {
             this.movieManager = movieManager;
         }
 
-        /* Author: Dennis van Hest
-         * Returns the view for the index with the IndexViewModel
-         */
+        /// <author>Dennis van Hest</author>
+        /// <summary>
+        /// Returns the view for the index with the IndexViewModel
+        /// </summary>
+        /// <returns>The view</returns>
         public ViewResult Index() {
             return View(movieManager.GetIndexViewModel());
         }

@@ -9,6 +9,10 @@
     <div class="info">
         <h2>@Model.Title</h2>
         <div class="subtitle-icon"><i class="fa fa-cc" aria-hidden="true"></i></div><div class="available-languages"><p>English, Dutch, Spanish, French...</p></div>
-        <button class="green-button">Subtitles <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
+        @if (Model is Subvault_Domain.Entities.Movie) {
+            <a href="@Html.Raw("/Movie/" + Model.Id)"><button class="green-button">Subtitles <i class="fa fa-arrow-right" aria-hidden="true"></i></button></a>
+        } else {
+            <button class="green-button">Subtitles <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
+        }
     </div>
 </div>

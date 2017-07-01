@@ -15,6 +15,13 @@ namespace Subvault_UI.BusinessLogic {
             subtitlesRepo = subtitlesRepository;
         }
 
+        /// <author>Dennis van Hest</author>
+        /// <summary>
+        /// Uploads the given subtitles to the server
+        /// </summary>
+        /// <param name="subtitles">Subtitle data</param>
+        /// <param name="movieId">The id of the movie the subtitles belong to</param>
+        /// <param name="file">The subtitles file</param>
         public void Upload (Subtitles subtitles, int movieId, HttpPostedFileBase file) {
             //Save the file
             string filePath = FileManager.SaveSubtitlesInFolder(file, movieId.ToString());
