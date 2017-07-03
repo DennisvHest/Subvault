@@ -9,8 +9,5 @@ namespace Subvault_Domain.Entities {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
         public string Name { get; set; }
-
-        //Many-to-many relation to Item
-        public virtual ICollection<Item> Items { get; set; }
     }
 }

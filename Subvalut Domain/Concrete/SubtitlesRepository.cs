@@ -24,6 +24,9 @@ namespace Subvault_Domain.Concrete {
             subtitles.Item = (Movie) item;
             subtitles.Uploader = user;
 
+            context.Items.Attach(subtitles.Item);
+            context.Users.Attach(subtitles.Uploader);
+
             context.Subtitles.Add(subtitles);
             context.SaveChanges();
         }

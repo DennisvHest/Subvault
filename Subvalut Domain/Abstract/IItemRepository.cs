@@ -7,5 +7,6 @@ namespace Subvault_Domain.Abstract {
 
         Movie GetMovieById(int id);
         IEnumerable<Item> SearchItemsByTitle(string title);
+        void InsertItem(Item item);
     }
 }

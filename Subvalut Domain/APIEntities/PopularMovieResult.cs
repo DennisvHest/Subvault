@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 
-namespace Subvalut_Domain.APIEntities {
+namespace Subvault_Domain.APIEntities {
 
-    public class MovieResult {
+    public class PopularMovieResult {
         public string poster_path { get; set; }
         public bool adult { get; set; }
         public string overview { get; set; }

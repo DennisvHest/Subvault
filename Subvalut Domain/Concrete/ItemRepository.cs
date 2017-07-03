@@ -32,5 +32,10 @@ namespace Subvault_Domain.Concrete {
             return context.Items
                 .Where(i => i.Title.Contains(title));
         }
+
+        public void InsertItem(Item item) {
+            context.Items.Add(item);
+            context.SaveChanges();
+        }
     }
 }

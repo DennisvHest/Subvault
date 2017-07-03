@@ -1,4 +1,4 @@
-﻿using Subvalut_Domain.APIEntities;
+﻿using Subvault_Domain.APIEntities;
 using Subvault_Domain.Entities;
 
 namespace Subvault_Domain.ObjectMappers {
@@ -11,7 +11,7 @@ namespace Subvault_Domain.ObjectMappers {
         /// </summary>
         /// <param name="movieResult">The movie result from the API</param>
         /// <returns>A Movie object</returns>
-        public Movie mapMovie(MovieResult movieResult) {
+        public Movie mapMovie(PopularMovieResult movieResult) {
             return new Movie {
                 Id = movieResult.id,
                 Title = movieResult.title,

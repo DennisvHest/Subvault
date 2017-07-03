@@ -13,6 +13,7 @@ namespace Subvault_UI.Models {
         public string BackdropURL { get; set; }
         public IEnumerable<Genre> Genres { get; set; }
         public IEnumerable<CastMember> CastMembers { get; set; }
-        public IEnumerable<Director> Directors { get; set; }
+        public IEnumerable<CrewMember> Directors { get; set; }
+        public IEnumerable<Subtitles> Subtitles { get; set; }
     }
 }

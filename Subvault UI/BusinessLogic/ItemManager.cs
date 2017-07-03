@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 using RestSharp;
-using Subvalut_Domain.APIEntities;
+using Subvault_Domain.APIEntities;
 using Subvault_Domain.Abstract;
 using Subvault_Domain.Entities;
 using Subvault_Domain.ObjectMappers;
@@ -30,7 +30,7 @@ namespace Subvault_UI.BusinessLogic {
         /// <returns>The IndexViewModel</returns>
         public IndexViewModel GetIndexViewModel() {
             //Retrieve the API popular movies result
-            IRestResponse popularMoviesResponse = itemApiRepo.getPopularMovies();
+            IRestResponse popularMoviesResponse = itemApiRepo.GetPopularMovies();
 
             //Convert the result from JSON to a PopularMoviesRoot object
             PopularMoviesRoot popularMoviesRoot = JsonConvert.DeserializeObject<PopularMoviesRoot>(popularMoviesResponse.Content);
@@ -38,7 +38,7 @@ namespace Subvault_UI.BusinessLogic {
             //Convert the PopularMoviesRoot object to a list with movies
             List<Movie> popularMovies = new List<Movie>();
 
-            foreach (MovieResult movieResult in popularMoviesRoot.results) {
+            foreach (PopularMovieResult movieResult in popularMoviesRoot.results) {
                 popularMovies.Add(apiMovieMapper.mapMovie(movieResult));
             }
 
@@ -57,6 +57,17 @@ namespace Subvault_UI.BusinessLogic {
         public MovieViewModel GetMovieById(int id) {
             Movie movie = itemRepo.GetMovieById(id);
 
+            //If the movie is not fou;nd in the database, get the movie from the API
+            if (movie == null) {
+                movie = GetMovieByIdFromAPI(id);
+                itemRepo.InsertItem(movie);
+            }
+
+            //IEnumerable<CastMember> castMembers = movie.People.Where(p => p is CastMember).AsEnumerable().Cast<CastMember>().Take(5);
+
+            //IEnumerable<CrewMember> crewMembers = movie.People.Where(p => p is CrewMember).AsEnumerable().Cast<CrewMember>();
+            //IEnumerable<CrewMember> directors = crewMembers.Where(p => p.Job == "Director");
+
             return new MovieViewModel {
                 Title = movie.Title,
                 Description = movie.Description,
@@ -64,20 +75,52 @@ namespace Subvault_UI.BusinessLogic {
                 PosterURL = movie.PosterURL,
                 BackdropURL = movie.BackdropURL,
                 Genres = movie.Genres,
-                CastMembers = movie.People.Where(p => p is CastMember).AsEnumerable().Cast<CastMember>(),
-                Directors = movie.People.Where(p => p is Director).AsEnumerable().Cast<Director>()
+                Subtitles = movie.Subtitles
             };
+        }
+
+        private Movie GetMovieByIdFromAPI(int id) {
+            //Retrieve the movie from the API
+            IRestResponse movieResponse = itemApiRepo.GetMovieById(id);
+
+            //Convert the response to a movie object
+            Movie movie = JsonConvert.DeserializeObject<Movie>(movieResponse.Content);
+
+            //TODO: Uncomment and add genres to movie
+
+            //Retrieve the credits (Person objects) from the API
+            //IRestResponse creditsResponse = itemApiRepo.GetCreditsByMovieId(id);
+
+            ////Convert the response to a MovieCreditsRoot object
+            //MovieCreditsRoot movieCreditsRoot = JsonConvert.DeserializeObject<MovieCreditsRoot>(creditsResponse.Content);
+
+            ////Add all people to the movie
+            //movie.ItemCrewMembers = new List<ItemCrewMember>();
+
+            //foreach (CrewMemberResult crewMember in movieCreditsRoot.Crew) {
+            //    movie.ItemCrewMembers.Add(new ItemCrewMember { ItemId = movie.Id, CrewMemberId = crewMember.Id, Item = movie, CrewMember = new CrewMember { Id = crewMember.Id, Name = crewMember.Name }, Job = crewMember.Job });
+            //}
+
+            //movie.ItemCastMembers = new List<ItemCastMember>();
+
+            movie.Genres = null;
+
+            return movie;
         }
 
         /// <author>Dennis van Hest</author>
         /// <summary>
-        /// Creates the view model for the search results page with the fiven query
+        /// Creates the view model for the search results page with the given query
         /// </summary>
         /// <param name="query">The query</param>
         /// <returns>The SearchResultsViewModel</returns>
         public SearchResultsViewModel Search(SearchQuery query) {
+            IRestResponse response = itemApiRepo.SearchMovies(query.Title, 1);
+
+            MovieSearchResultsRoot movieSearchResultsRoot = JsonConvert.DeserializeObject<MovieSearchResultsRoot>(response.Content);
+
             return new SearchResultsViewModel {
-                FoundItems = itemRepo.SearchItemsByTitle(query.Title),
+                FoundItems = movieSearchResultsRoot.Results,
                 Title = query.Title
             };
         }

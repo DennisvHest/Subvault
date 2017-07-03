@@ -11,7 +11,7 @@
     @if (Model.FoundItems.Count() != 0) {
         <div class="item-container">
             @foreach (Movie movie in Model.FoundItems) {
-                @Html.Partial("_ItemCard", movie)
+                @Html.Partial("_ItemBox", movie)
             }
         </div>
     } else {

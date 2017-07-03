@@ -69,7 +69,10 @@
     <Compile Include="Abstract\IItemRepository.cs" />
     <Compile Include="Abstract\ISubtitlesRepository.cs" />
     <Compile Include="Abstract\IUserRepository.cs" />
-    <Compile Include="APIEntities\MovieResult.cs" />
+    <Compile Include="APIEntities\CrewMemberResult.cs" />
+    <Compile Include="APIEntities\MovieCreditsRoot.cs" />
+    <Compile Include="APIEntities\MovieSearchResultsRoot.cs" />
+    <Compile Include="APIEntities\PopularMovieResult.cs" />
     <Compile Include="APIEntities\PopularMoviesRoot.cs" />
     <Compile Include="Concrete\EFDbContext.cs" />
     <Compile Include="Concrete\ItemRepository.cs" />
@@ -77,9 +80,11 @@
     <Compile Include="Concrete\SubtitlesRepository.cs" />
     <Compile Include="Concrete\UserRepository.cs" />
     <Compile Include="Entities\CastMember.cs" />
-    <Compile Include="Entities\Director.cs" />
+    <Compile Include="Entities\CrewMember.cs" />
     <Compile Include="Entities\Genre.cs" />
     <Compile Include="Entities\Item.cs" />
+    <Compile Include="Entities\ItemCastMember.cs" />
+    <Compile Include="Entities\ItemCrewMember.cs" />
     <Compile Include="Entities\Movie.cs" />
     <Compile Include="Entities\Person.cs" />
     <Compile Include="Entities\Subtitles.cs" />
@@ -88,37 +93,9 @@
     <Compile Include="Exceptions\UserAlreadyExistsException.cs" />
     <Compile Include="Exceptions\UserDoesNotExistException.cs" />
     <Compile Include="GlobalSettings.cs" />
-    <Compile Include="Migrations\201706261021412_Refresh.cs" />
-    <Compile Include="Migrations\201706261021412_Refresh.Designer.cs">
-      <DependentUpon>201706261021412_Refresh.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201706271403399_Item additional attributes added.cs" />
-    <Compile Include="Migrations\201706271403399_Item additional attributes added.Designer.cs">
-      <DependentUpon>201706271403399_Item additional attributes added.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201706271410397_Item release date nullable.cs" />
-    <Compile Include="Migrations\201706271410397_Item release date nullable.Designer.cs">
-      <DependentUpon>201706271410397_Item release date nullable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201706281004172_Genre entity added.cs" />
-    <Compile Include="Migrations\201706281004172_Genre entity added.Designer.cs">
-      <DependentUpon>201706281004172_Genre entity added.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201706281007525_Genre Item many to many.cs" />
-    <Compile Include="Migrations\201706281007525_Genre Item many to many.Designer.cs">
-      <DependentUpon>201706281007525_Genre Item many to many.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201707010921194_Person class added.cs" />
-    <Compile Include="Migrations\201707010921194_Person class added.Designer.cs">
-      <DependentUpon>201707010921194_Person class added.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201707010929236_Item-Person many-to-many.cs" />
-    <Compile Include="Migrations\201707010929236_Item-Person many-to-many.Designer.cs">
-      <DependentUpon>201707010929236_Item-Person many-to-many.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201707010932264_Item-Person many-to-many fix.cs" />
-    <Compile Include="Migrations\201707010932264_Item-Person many-to-many fix.Designer.cs">
-      <DependentUpon>201707010932264_Item-Person many-to-many fix.cs</DependentUpon>
+    <Compile Include="Migrations\201707021459432_Refresh.cs" />
+    <Compile Include="Migrations\201707021459432_Refresh.Designer.cs">
+      <DependentUpon>201707021459432_Refresh.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ObjectMappers\APIMovieMapper.cs" />
@@ -129,29 +106,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201706261021412_Refresh.resx">
-      <DependentUpon>201706261021412_Refresh.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706271403399_Item additional attributes added.resx">
-      <DependentUpon>201706271403399_Item additional attributes added.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706271410397_Item release date nullable.resx">
-      <DependentUpon>201706271410397_Item release date nullable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706281004172_Genre entity added.resx">
-      <DependentUpon>201706281004172_Genre entity added.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706281007525_Genre Item many to many.resx">
-      <DependentUpon>201706281007525_Genre Item many to many.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201707010921194_Person class added.resx">
-      <DependentUpon>201707010921194_Person class added.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201707010929236_Item-Person many-to-many.resx">
-      <DependentUpon>201707010929236_Item-Person many-to-many.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201707010932264_Item-Person many-to-many fix.resx">
-      <DependentUpon>201707010932264_Item-Person many-to-many fix.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201707021459432_Refresh.resx">
+      <DependentUpon>201707021459432_Refresh.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

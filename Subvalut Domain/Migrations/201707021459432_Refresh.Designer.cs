@@ -7,13 +7,13 @@ namespace Subvault_Domain.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class Personclassadded : IMigrationMetadata
+    public sealed partial class Refresh : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Personclassadded));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Refresh));
         
         string IMigrationMetadata.Id
         {
-            get { return "201707010921194_Person class added"; }
+            get { return "201707021459432_Refresh"; }
         }
         
         string IMigrationMetadata.Source

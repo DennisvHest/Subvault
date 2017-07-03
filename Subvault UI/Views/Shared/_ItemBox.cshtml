@@ -7,6 +7,10 @@
     <div class="item-info-box">
         <h3>@Model.Title</h3>
         <div class="subtitle-icon"><i class="fa fa-cc" aria-hidden="true"></i></div><div class="available-languages"><p>English, Dutch, Spanish, French...</p></div>
-        <button class="green-button">Subtitles <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
+        @if (Model is Subvault_Domain.Entities.Movie) {
+            <a href="@Html.Raw("/Movie/" + Model.Id)"><button class="green-button">Subtitles <i class="fa fa-arrow-right" aria-hidden="true"></i></button></a>
+        } else {
+            <button class="green-button">Subtitles <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
+        }
     </div>
 </div>

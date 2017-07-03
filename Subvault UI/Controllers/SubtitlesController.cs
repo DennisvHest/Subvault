@@ -42,5 +42,10 @@ namespace Subvault_UI.Controllers {
             TempData["upload-success"] = true;
             return RedirectToAction("Index", "Home");
         }
+
+        public FileResult Download(string filePath, string fileName) {
+            string contentType = "text/plain";
+            return File(filePath, contentType, fileName);
+        }
     }
 }
