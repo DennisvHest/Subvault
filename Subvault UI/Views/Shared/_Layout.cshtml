@@ -22,6 +22,10 @@
     <script src="~/Scripts/jquery-1.10.2.js"></script>
 
     <script src="~/Scripts/mobile-nav.js"></script>
+
+    <script src="~/Scripts/multiselect.js"></script>
+
+    @RenderSection("Scripts", false)
 </head>
 <body>
     <nav id="mobile-nav" class="hidden-sm hidden-md hidden-lg hidden-xl">
@@ -40,6 +44,20 @@
         </a>
 
         @Html.Partial("_NavSearch", new Subvault_UI.Models.SearchQuery())
+
+        <div class="multiselect">
+            <button>Select language(s)<i class="fa fa-chevron-down" aria-hidden="true"></i></button>
+            <div class="multi-dropdown">
+                <ul>
+                    @foreach (KeyValuePair<string, string> language in Subvault_Domain.GlobalSettings.LanguageCodes) {
+                        <li>
+                            <input id="multiselect-@language.Key" type="checkbox" name="language-multiselect" value="@language.Key" />
+                            <label class="sub-spec-label" for="multiselect-@language.Key"><span></span> @language.Value</label>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
 
         @if (Session["Login"] == null) {
             if (TempData["Login"] != null) {

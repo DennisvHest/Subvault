@@ -1,4 +1,6 @@
-﻿namespace Subvault_Domain {
+﻿using System.Collections.Generic;
+
+namespace Subvault_Domain {
 
     public class GlobalSettings {
 
@@ -10,5 +12,12 @@
         public static int ItemDetailPosterWidth = ItemBoxPosterWidth;
         public static string ItemDetailBackdropWidth = "original";
         public static string SubtitlesFileRoot = "~/subtitles/";
+
+        public static Dictionary<string, string> LanguageCodes = new Dictionary<string, string>() {
+            { "gb", "English" },
+            { "fr", "French" },
+            { "es", "Spanish" },
+            { "nl", "Dutch" }
+        };
     }
 }

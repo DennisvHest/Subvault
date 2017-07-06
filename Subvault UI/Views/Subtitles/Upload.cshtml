@@ -6,12 +6,10 @@
 @{
     ViewBag.Title = "Upload subtitles";
 
-    var listItems = new List<ListItem> {
-        new ListItem { Text = "English", Value="English" },
-        new ListItem { Text = "French", Value="French" },
-        new ListItem { Text = "Spanish", Value="Spanish" },
-        new ListItem { Text = "Dutch", Value="Dutch" }
-  };
+    var listItems = new List<ListItem>();
+    foreach (KeyValuePair<string, string> language in Subvault_Domain.GlobalSettings.LanguageCodes) {
+        listItems.Add(new ListItem { Text = language.Value, Value = language.Key });
+    }
 }
 
 <div id="upload-area" class="col-md-12 col-lg-10 col-lg-offset-1 col-xl-8 col-xl-offset-2">
@@ -32,7 +30,7 @@
         <div id="meta-data-area" class="upload-step col-xs-12 col-md-5">
             <h3><div class="step-number">3</div>Specify additional information</h3>
             <label class="sub-spec-label">Language</label>
-            @Html.DropDownListFor(s => s.Language, new SelectList(listItems))
+            @Html.DropDownListFor(s => s.Language, new SelectList(listItems, "Value", "Text"))
             <label class="sub-spec-label">Synced with</label>
             <div class="sync-type col-xs-3">
                 @Html.RadioButtonFor(s => s.SyncType, "Bluray", new { @id = "bluray-radio" })
