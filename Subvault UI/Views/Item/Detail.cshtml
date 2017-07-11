@@ -1,0 +1,95 @@
+﻿@using Subvault_Domain
+
+@model Subvault_UI.Models.ItemViewModel
+
+@{
+    ViewBag.Title = Model.Title;
+
+    string backdropSrc = @GlobalSettings.APIImageRoot + "/" + @GlobalSettings.ItemDetailBackdropWidth + @Model.BackdropURL;
+}
+
+@section Scripts {
+    <script src="~/Scripts/list.js"></script>
+    <script src="~/Scripts/subtitles-list.js"></script>
+}
+
+<style>
+    #item-detail-backdrop {
+        background-image: url("@backdropSrc");
+    }
+</style>
+
+<div id="item-detail" class="col-xs-12">
+    <div id="item-detail-backdrop">
+        @if (!String.IsNullOrEmpty(Model.PosterURL)) {
+            <img src="@GlobalSettings.APIImageRoot/w@(GlobalSettings.ItemDetailPosterWidth)@(Model.PosterURL)" />
+        } else {
+            <img src="~/Content/img/img-not-available.png" />
+        }
+        <h1>@Model.Title</h1>
+    </div>
+    <div id="backdrop-gradient"></div>
+
+    @if (Model is Subvault_UI.Models.MovieViewModel) {
+        IEnumerable<Subvault_Domain.Entities.Subtitles> subtitles = ((Subvault_UI.Models.MovieViewModel)Model).Subtitles;
+        @Html.Partial("_MovieSubtitlesList", subtitles)
+    } else {
+        <div id="episodes-list"></div>
+    }
+
+    <div id="item-detail-box" class="col-xs-12">
+        <div id="item-detail-text" class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+            @if (Model is Subvault_UI.Models.MovieViewModel) {
+                <h4>Movie details</h4>
+            } else {
+                <h4>Series details</h4>
+            }
+            <div id="item-detail-table">
+                <div class="col-xs-12 col-md-6 col-lg-4">
+                    <b>Release date</b>
+                    @if (Model.ReleaseDate.HasValue) {
+                        <p>@Model.ReleaseDate.Value.ToString("M-d-yyy")</p>
+                    } else {
+                        <p>No release date</p>
+                    }
+                </div>
+                <div class="col-xs-12 col-md-6 col-lg-4">
+                    <b>Genres</b>
+                    <p>
+                        @for (int i = 0; i < Model.Genres.Count(); i++) {
+                                if (Model.Genres.Count() == 1 || i == Model.Genres.Count() - 1) {
+                                    @Html.Raw(Model.Genres.ToArray()[i].Name)
+                                } else {
+                                    @Html.Raw(Model.Genres.ToArray()[i].Name + ", ")
+                                }
+                            }
+                    </p>
+                </div>
+                <div class="col-xs-12col-md-6 col-lg-4">
+                    <b>Directed by</b>
+                    <p>
+                        @for (int i = 0; i < Model.Directors.Count(); i++) {
+                                if (Model.Directors.Count() == 1 || i == Model.Directors.Count() - 1) {
+                                    @Html.Raw(Model.Directors.ToArray()[i].Name)
+                                } else {
+                                    @Html.Raw(Model.Directors.ToArray()[i].Name + ", ")
+                                }
+                            }
+                    </p>
+                </div>
+                <div class="col-xs-12 col-md-6 col-xs-12">
+                    <b>Cast</b>
+                    <p>
+                        @foreach (Subvault_Domain.Entities.CastMember castMember in Model.CastMembers) {
+                                @Html.Raw(castMember.Name + ", ")
+                            }
+                            ...
+                    </p>
+                </div>
+            </div>
+            </table>
+            <h4>Description</h4>
+            <p>@Model.Description</p>
+        </div>
+    </div>
+</div>

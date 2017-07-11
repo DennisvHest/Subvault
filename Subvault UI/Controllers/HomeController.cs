@@ -17,7 +17,13 @@ namespace Subvault_UI.Controllers {
         /// </summary>
         /// <returns>The view</returns>
         public ViewResult Index() {
+            ViewBag.Type = "Movie";
             return View(movieManager.GetIndexViewModel());
+        }
+
+        public ViewResult SeriesIndex() {
+            ViewBag.Type = "Series";
+            return View("Index", movieManager.GetSeriesIndexViewModel());
         }
     }
 }

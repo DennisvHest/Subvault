@@ -25,9 +25,20 @@
 
     <script src="~/Scripts/multiselect.js"></script>
 
+    <script src="~/Scripts/upload-dialog.js"></script>
+
     @RenderSection("Scripts", false)
 </head>
 <body>
+    <div class="dialog" id="upload-dialog">
+        <div class="dialog-inner">
+            <p>For what would you like to upload subtitles?</p>
+            <button class="dialog-close">X</button>
+            <div class="col-xs-6"><a href="@Url.Action("Upload", "Subtitles")"><button>For a movie</button></a></div>
+            <div class="col-xs-6"><a href="@Url.Action("Upload", "Subtitles")"><button>For a series</button></a></div>
+        </div>
+    </div>
+
     <nav id="mobile-nav" class="hidden-sm hidden-md hidden-lg hidden-xl">
         <button><i class="fa fa-bars" aria-hidden="true"></i></button>
         <a href="/">
@@ -46,7 +57,7 @@
         @Html.Partial("_NavSearch", new Subvault_UI.Models.SearchQuery())
 
         <div class="multiselect">
-            <button>Select language(s)<i class="fa fa-chevron-down" aria-hidden="true"></i></button>
+            <button>All languages<i class="fa fa-chevron-down" aria-hidden="true"></i></button>
             <div class="multi-dropdown">
                 <ul>
                     @foreach (KeyValuePair<string, string> language in Subvault_Domain.GlobalSettings.LanguageCodes) {
@@ -68,7 +79,6 @@
         } else {
             @Html.Partial("_NavUser", Session["Login"])
         }
-
     </nav>
 
     <div id="content">

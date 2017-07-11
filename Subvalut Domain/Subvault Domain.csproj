@@ -69,11 +69,15 @@
     <Compile Include="Abstract\IItemRepository.cs" />
     <Compile Include="Abstract\ISubtitlesRepository.cs" />
     <Compile Include="Abstract\IUserRepository.cs" />
+    <Compile Include="APIEntities\CastMemberResult.cs" />
     <Compile Include="APIEntities\CrewMemberResult.cs" />
-    <Compile Include="APIEntities\MovieCreditsRoot.cs" />
+    <Compile Include="APIEntities\MovieApiResult.cs" />
+    <Compile Include="APIEntities\CreditsRoot.cs" />
     <Compile Include="APIEntities\MovieSearchResultsRoot.cs" />
-    <Compile Include="APIEntities\PopularMovieResult.cs" />
+    <Compile Include="APIEntities\PopularSeriesResult.cs" />
     <Compile Include="APIEntities\PopularMoviesRoot.cs" />
+    <Compile Include="APIEntities\PopularSeriesRoot.cs" />
+    <Compile Include="APIEntities\SeriesApiResult.cs" />
     <Compile Include="Concrete\EFDbContext.cs" />
     <Compile Include="Concrete\ItemRepository.cs" />
     <Compile Include="Concrete\ItemAPIRepository.cs" />
@@ -81,24 +85,27 @@
     <Compile Include="Concrete\UserRepository.cs" />
     <Compile Include="Entities\CastMember.cs" />
     <Compile Include="Entities\CrewMember.cs" />
+    <Compile Include="Entities\Episode.cs" />
     <Compile Include="Entities\Genre.cs" />
     <Compile Include="Entities\Item.cs" />
     <Compile Include="Entities\ItemCastMember.cs" />
     <Compile Include="Entities\ItemCrewMember.cs" />
+    <Compile Include="Entities\ItemGenre.cs" />
     <Compile Include="Entities\Movie.cs" />
-    <Compile Include="Entities\Person.cs" />
+    <Compile Include="Entities\Season.cs" />
+    <Compile Include="Entities\Series.cs" />
     <Compile Include="Entities\Subtitles.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Exceptions\PasswordNotEqualToPasswordRepeatException.cs" />
     <Compile Include="Exceptions\UserAlreadyExistsException.cs" />
     <Compile Include="Exceptions\UserDoesNotExistException.cs" />
     <Compile Include="GlobalSettings.cs" />
-    <Compile Include="Migrations\201707021459432_Refresh.cs" />
-    <Compile Include="Migrations\201707021459432_Refresh.Designer.cs">
-      <DependentUpon>201707021459432_Refresh.cs</DependentUpon>
+    <Compile Include="Migrations\201707101351276_Refresh.cs" />
+    <Compile Include="Migrations\201707101351276_Refresh.Designer.cs">
+      <DependentUpon>201707101351276_Refresh.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="ObjectMappers\APIMovieMapper.cs" />
+    <Compile Include="ObjectMappers\APISeriesMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -106,8 +113,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201707021459432_Refresh.resx">
-      <DependentUpon>201707021459432_Refresh.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201707101351276_Refresh.resx">
+      <DependentUpon>201707101351276_Refresh.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -191,6 +191,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\multiselect.js" />
     <Content Include="Scripts\subtitles-list.js" />
+    <Content Include="Scripts\upload-dialog.js" />
     <Content Include="Scripts\upload.js" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -205,6 +206,7 @@
     <Compile Include="BusinessLogic\ItemManager.cs" />
     <Compile Include="Controllers\APIController.cs" />
     <Compile Include="Controllers\MovieController.cs" />
+    <Compile Include="Controllers\SeriesController.cs" />
     <Compile Include="Controllers\SubtitlesController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -215,11 +217,13 @@
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
     <Compile Include="Models\IndexViewModel.cs" />
     <Compile Include="Models\ItemAPIModel.cs" />
+    <Compile Include="Models\ItemViewModel.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\MovieViewModel.cs" />
     <Compile Include="Models\RegisteringUser.cs" />
     <Compile Include="Models\SearchQuery.cs" />
     <Compile Include="Models\SearchResultsViewModel.cs" />
+    <Compile Include="Models\SeriesViewModel.cs" />
     <Compile Include="Models\SubtitlesUploadViewModel.cs" />
     <Compile Include="Models\UserSessionViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -242,7 +246,8 @@
     <Content Include="Views\User\Register.cshtml" />
     <Content Include="Views\Shared\_NavUser.cshtml" />
     <Content Include="Views\Subtitles\Upload.cshtml" />
-    <Content Include="Views\Movie\Detail.cshtml" />
+    <Content Include="Views\Item\Detail.cshtml" />
+    <Content Include="Views\Shared\_MovieSubtitlesList.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

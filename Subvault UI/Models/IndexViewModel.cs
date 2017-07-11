@@ -5,6 +5,6 @@ namespace Subvault_UI.Models {
 
     public class IndexViewModel {
 
-        public IEnumerable<Movie> PopularMovies;
+        public IEnumerable<Item> PopularItems;
     }
 }

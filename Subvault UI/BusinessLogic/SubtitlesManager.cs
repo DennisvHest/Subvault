@@ -29,7 +29,7 @@ namespace Subvault_UI.BusinessLogic {
 
             subtitles.FilePath = filePath;
             subtitles.FileName = file.FileName;
-            subtitles.Item = new Movie { Id = movieId };
+            subtitles.Movie = new Movie { Id = movieId };
             subtitles.Uploader = new User { Username = loggedInUser.Username };
 
             //Add the subtitles to the database

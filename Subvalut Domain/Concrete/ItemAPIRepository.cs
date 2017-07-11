@@ -23,6 +23,15 @@ namespace Subvault_Domain.Concrete {
             return response;
         }
 
+        public IRestResponse GetPopularSeries() {
+            RestClient client = new RestClient(GlobalSettings.APIRoot + "/tv/popular?page=1&language=en-US&api_key=" + GlobalSettings.APIKey);
+            RestRequest request = new RestRequest(Method.GET);
+
+            IRestResponse response = client.Execute(request);
+
+            return response;
+        }
+
         public IRestResponse GetMovieById(int id) {
             RestClient client = new RestClient(GlobalSettings.APIRoot + "/movie/" + id + "?language=en-US&api_key=" + GlobalSettings.APIKey);
             RestRequest request = new RestRequest(Method.GET);
@@ -32,8 +41,26 @@ namespace Subvault_Domain.Concrete {
             return response;
         }
 
+        public IRestResponse GetSeriesById(int id) {
+            RestClient client = new RestClient(GlobalSettings.APIRoot + "/tv/" + id + "?language=en-US&api_key=" + GlobalSettings.APIKey);
+            RestRequest request = new RestRequest(Method.GET);
+
+            IRestResponse response = client.Execute(request);
+
+            return response;
+        }
+
         public IRestResponse GetCreditsByMovieId(int id) {
             RestClient client = new RestClient(GlobalSettings.APIRoot + "/movie/" + id + "/credits?api_key=" + GlobalSettings.APIKey);
+            RestRequest request = new RestRequest(Method.GET);
+
+            IRestResponse response = client.Execute(request);
+
+            return response;
+        }
+
+        public IRestResponse GetCreditsBySeriesId(int id) {
+            RestClient client = new RestClient(GlobalSettings.APIRoot + "/tv/" + id + "/credits?api_key=" + GlobalSettings.APIKey);
             RestRequest request = new RestRequest(Method.GET);
 
             IRestResponse response = client.Execute(request);

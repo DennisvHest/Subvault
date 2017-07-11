@@ -9,14 +9,19 @@
     @if (TempData["upload-success"] != null) {
         <div class="success-banner"><p>The subtitles were successfully uploaded.</p></div>
     }
-    <button class="active">Movies</button>
-    <button>Series</button>
+    @if (ViewBag.Type == "Movie") {
+        <a href="/"><button class="active">Movies</button></a>
+        <a href="/Series"><button>Series</button></a>
+    } else {
+        <a href="/"><button>Movies</button></a>
+        <a href="/Series"><button class="active">Series</button></a>
+    }
 </nav>
 
 <div id="popular">
-    <h1>Popular movies with subtitles</h1>
+    <h1>Popular with subtitles</h1>
     <div class="item-container">
-        @foreach (Movie movie in Model.PopularMovies) {
+        @foreach (Item movie in Model.PopularItems) {
             @Html.Partial("_ItemBox", @movie)
         }
     </div>

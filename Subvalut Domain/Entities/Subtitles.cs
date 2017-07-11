@@ -14,6 +14,9 @@
         public virtual User Uploader { get; set; }
 
         //Foreign key to Movie
-        public virtual Movie Item { get; set; }
+        public virtual Movie Movie { get; set; }
+
+        //One-to-many relation to Episode
+        public virtual Episode Episode { get; set; }
     }
 }

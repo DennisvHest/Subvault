@@ -18,13 +18,13 @@ namespace Subvault_Domain.Concrete {
         /// </summary>
         /// <param name="subtitles">The subtitles</param>
         public void CreateSubtitles(Subtitles subtitles) {
-            Item item = context.Items.SingleOrDefault(i => i.Id == subtitles.Item.Id);
+            Item item = context.Items.SingleOrDefault(i => i.Id == subtitles.Movie.Id);
             User user = context.Users.SingleOrDefault(u => u.Username == subtitles.Uploader.Username);
 
-            subtitles.Item = (Movie) item;
+            subtitles.Movie = (Movie) item;
             subtitles.Uploader = user;
 
-            context.Items.Attach(subtitles.Item);
+            context.Items.Attach(subtitles.Movie);
             context.Users.Attach(subtitles.Uploader);
 
             context.Subtitles.Add(subtitles);

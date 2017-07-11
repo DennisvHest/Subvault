@@ -14,13 +14,13 @@ namespace Subvault_UI.BusinessLogic {
 
         public IItemAPIRepository itemApiRepo;
         public IItemRepository itemRepo;
-        private APIMovieMapper apiMovieMapper;
+        private APISeriesMapper apiMovieMapper;
 
         public ItemManager(IItemAPIRepository itemApiRepo, IItemRepository itemRepo) {
             this.itemApiRepo = itemApiRepo;
             this.itemRepo = itemRepo;
 
-            apiMovieMapper = new APIMovieMapper();
+            apiMovieMapper = new APISeriesMapper();
         }
 
         /// <author>Dennis van Hest</author>
@@ -35,17 +35,26 @@ namespace Subvault_UI.BusinessLogic {
             //Convert the result from JSON to a PopularMoviesRoot object
             PopularMoviesRoot popularMoviesRoot = JsonConvert.DeserializeObject<PopularMoviesRoot>(popularMoviesResponse.Content);
 
-            //Convert the PopularMoviesRoot object to a list with movies
-            List<Movie> popularMovies = new List<Movie>();
-
-            foreach (PopularMovieResult movieResult in popularMoviesRoot.results) {
-                popularMovies.Add(apiMovieMapper.mapMovie(movieResult));
-            }
-
             //Create the viewmodel
-            IndexViewModel indexViewModel = new IndexViewModel { PopularMovies = popularMovies.Take(6) };
+            IndexViewModel indexViewModel = new IndexViewModel { PopularItems = popularMoviesRoot.Results.Take(6) };
 
             return indexViewModel;
+        }
+
+        public IndexViewModel GetSeriesIndexViewModel() {
+            IRestResponse popularSeriesResponse = itemApiRepo.GetPopularSeries();
+
+            PopularSeriesRoot popularSeriesRoot = JsonConvert.DeserializeObject<PopularSeriesRoot>(popularSeriesResponse.Content);
+
+            List<Series> series = new List<Series>();
+
+            foreach (PopularSeriesResult result in popularSeriesRoot.Results) {
+                series.Add(apiMovieMapper.mapMovie(result));
+            }
+
+            IndexViewModel indexVieModel = new IndexViewModel { PopularItems = series.Take(6) };
+
+            return indexVieModel;
         }
 
         /// <author>Dennis van Hest</author>
@@ -57,55 +66,175 @@ namespace Subvault_UI.BusinessLogic {
         public MovieViewModel GetMovieById(int id) {
             Movie movie = itemRepo.GetMovieById(id);
 
-            //If the movie is not fou;nd in the database, get the movie from the API
+            //If the movie is not found in the database, get the movie from the API
             if (movie == null) {
                 movie = GetMovieByIdFromAPI(id);
                 itemRepo.InsertItem(movie);
             }
 
-            //IEnumerable<CastMember> castMembers = movie.People.Where(p => p is CastMember).AsEnumerable().Cast<CastMember>().Take(5);
-
-            //IEnumerable<CrewMember> crewMembers = movie.People.Where(p => p is CrewMember).AsEnumerable().Cast<CrewMember>();
-            //IEnumerable<CrewMember> directors = crewMembers.Where(p => p.Job == "Director");
+            IEnumerable<CastMember> castMembers = movie.ItemCastMembers.Select(ic => ic.CastMember).Distinct().Take(5);
+            IEnumerable<Genre> genres = movie.ItemGenres.Select(ig => ig.Genre);
+            IEnumerable<CrewMember> directors = movie.ItemCrewMembers.Where(ic => ic.Job == "Director").Select(ic => ic.CrewMember).Distinct();
 
             return new MovieViewModel {
                 Title = movie.Title,
                 Description = movie.Description,
                 ReleaseDate = movie.ReleaseDate,
-                PosterURL = movie.PosterURL,
+                PosterURL = movie.PosterPath,
                 BackdropURL = movie.BackdropURL,
-                Genres = movie.Genres,
+                Genres = genres,
+                CastMembers = castMembers,
+                Directors = directors,
                 Subtitles = movie.Subtitles
             };
         }
 
+        public SeriesViewModel GetSeriesById(int id) {
+            Series series = itemRepo.GetSeriesById(id);
+
+            //If the series is not found in the database, get the series from the API
+            if (series == null) {
+                series = GetSeriesByIdFromApi(id);
+                itemRepo.InsertItem(series);
+            }
+
+            IEnumerable<CastMember> castMembers = series.ItemCastMembers.Select(ic => ic.CastMember).Distinct().Take(5);
+            IEnumerable<Genre> genres = series.ItemGenres.Select(ig => ig.Genre);
+            IEnumerable<CrewMember> directors = series.ItemCrewMembers.Where(ic => ic.Job == "Director").Select(ic => ic.CrewMember).Distinct();
+
+            return new SeriesViewModel {
+                Title = series.Title,
+                Description = series.Description,
+                ReleaseDate = series.ReleaseDate,
+                PosterURL = series.PosterPath,
+                BackdropURL = series.BackdropURL,
+                Genres = genres,
+                CastMembers = castMembers,
+                Directors = directors
+            };
+        }
+
+        /// <summary>
+        /// Returns the movie with the given id from the API
+        /// </summary>
+        /// <param name="id">Id of the movie</param>
+        /// <returns>A Movie object</returns>
         private Movie GetMovieByIdFromAPI(int id) {
             //Retrieve the movie from the API
             IRestResponse movieResponse = itemApiRepo.GetMovieById(id);
 
             //Convert the response to a movie object
-            Movie movie = JsonConvert.DeserializeObject<Movie>(movieResponse.Content);
-
-            //TODO: Uncomment and add genres to movie
+            MovieApiResult apiMovie = JsonConvert.DeserializeObject<MovieApiResult>(movieResponse.Content);
 
             //Retrieve the credits (Person objects) from the API
-            //IRestResponse creditsResponse = itemApiRepo.GetCreditsByMovieId(id);
+            IRestResponse creditsResponse = itemApiRepo.GetCreditsByMovieId(id);
 
-            ////Convert the response to a MovieCreditsRoot object
-            //MovieCreditsRoot movieCreditsRoot = JsonConvert.DeserializeObject<MovieCreditsRoot>(creditsResponse.Content);
+            //Convert the response to a MovieCreditsRoot object
+            CreditsRoot movieCreditsRoot = JsonConvert.DeserializeObject<CreditsRoot>(creditsResponse.Content);
 
-            ////Add all people to the movie
-            //movie.ItemCrewMembers = new List<ItemCrewMember>();
+            Movie movie = new Movie {
+                Id = apiMovie.Id,
+                Title = apiMovie.Title,
+                Description = apiMovie.Description,
+                ReleaseDate = apiMovie.ReleaseDate,
+                PosterPath = apiMovie.PosterURL,
+                BackdropURL = apiMovie.BackdropURL
+            };
 
-            //foreach (CrewMemberResult crewMember in movieCreditsRoot.Crew) {
-            //    movie.ItemCrewMembers.Add(new ItemCrewMember { ItemId = movie.Id, CrewMemberId = crewMember.Id, Item = movie, CrewMember = new CrewMember { Id = crewMember.Id, Name = crewMember.Name }, Job = crewMember.Job });
-            //}
+            movie.ItemGenres = new List<ItemGenre>();
 
-            //movie.ItemCastMembers = new List<ItemCastMember>();
+            foreach (Genre genre in apiMovie.Genres) {
+                movie.ItemGenres.Add(new ItemGenre { ItemId = movie.Id, GenreId = genre.Id, Item = movie, Genre = genre });
+            }
 
-            movie.Genres = null;
+            //Add all people to the movie
+            movie.ItemCrewMembers = new List<ItemCrewMember>();
+
+            foreach (CrewMemberResult crewMember in movieCreditsRoot.Crew) {
+                movie.ItemCrewMembers.Add(
+                        new ItemCrewMember {
+                            ItemId = movie.Id,
+                            CrewMemberId = crewMember.Id,
+                            Item = movie,
+                            CrewMember = new CrewMember { Id = crewMember.Id, Name = crewMember.Name },
+                            Job = crewMember.Job
+                        }
+                    );
+            }
+
+            movie.ItemCastMembers = new List<ItemCastMember>();
+
+            foreach (CastMemberResult castMember in movieCreditsRoot.Cast) {
+                movie.ItemCastMembers.Add(
+                        new ItemCastMember {
+                            ItemId = movie.Id,
+                            CastMemberId = castMember.Id,
+                            Item = movie,
+                            CastMember = new CastMember { Id = castMember.Id, Name = castMember.Name },
+                            Character = castMember.Character
+                        }
+                    );
+            }
 
             return movie;
+        }
+
+        public Series GetSeriesByIdFromApi(int id) {
+            IRestResponse seriesResponse = itemApiRepo.GetSeriesById(id);
+
+            //Convert the response to a movie object
+            SeriesApiResult apiSeries = JsonConvert.DeserializeObject<SeriesApiResult>(seriesResponse.Content);
+
+            //Retrieve the credits (Person objects) from the API
+            IRestResponse creditsResponse = itemApiRepo.GetCreditsBySeriesId(id);
+
+            //Convert the response to a MovieCreditsRoot object
+            CreditsRoot creditsRoot = JsonConvert.DeserializeObject<CreditsRoot>(creditsResponse.Content);
+
+            Series series = new Series() {
+                Id = apiSeries.Id,
+                Title = apiSeries.Name,
+                Description = apiSeries.Description,
+                ReleaseDate = apiSeries.AirDate,
+                PosterPath = apiSeries.PosterURL,
+                BackdropURL = apiSeries.BackdropPath
+            };
+
+            series.ItemGenres = new List<ItemGenre>();
+
+            foreach (Genre genre in apiSeries.Genres) {
+                series.ItemGenres.Add(new ItemGenre { ItemId = series.Id, GenreId = genre.Id, Item = series, Genre = genre });
+            }
+
+            series.ItemCrewMembers = new List<ItemCrewMember>();
+
+            foreach (CrewMemberResult crewMember in creditsRoot.Crew) {
+                series.ItemCrewMembers.Add(
+                        new ItemCrewMember {
+                            ItemId = series.Id,
+                            CrewMemberId = crewMember.Id,
+                            Item = series,
+                            CrewMember = new CrewMember { Id = crewMember.Id, Name = crewMember.Name },
+                            Job = crewMember.Job
+                        }
+                    );
+            }
+
+            series.ItemCastMembers = new List<ItemCastMember>();
+
+            foreach (CastMemberResult castMember in creditsRoot.Cast) {
+                series.ItemCastMembers.Add(
+                        new ItemCastMember {
+                            ItemId = series.Id,
+                            CastMemberId = castMember.Id,
+                            Item = series,
+                            CastMember = new CastMember { Id = castMember.Id, Name = castMember.Name },
+                            Character = castMember.Character
+                        }
+                    );
+            }
+
+            return series;
         }
 
         /// <author>Dennis van Hest</author>
@@ -140,7 +269,7 @@ namespace Subvault_UI.BusinessLogic {
                 ItemAPIModel itemApiModel = new ItemAPIModel {
                     Id = item.Id,
                     Title = item.Title,
-                    PosterURL = item.PosterURL
+                    PosterURL = item.PosterPath
                 };
 
                 itemList.Add(itemApiModel);

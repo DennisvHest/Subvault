@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Subvault_Domain.Entities {
 
-    public abstract class Item {
+    public class Item {
 
         [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
@@ -19,13 +19,13 @@ namespace Subvault_Domain.Entities {
         public DateTime? ReleaseDate { get; set; }
 
         [JsonProperty("poster_path")]
-        public string PosterURL { get; set; }
+        public string PosterPath { get; set; }
 
         [JsonProperty("backdrop_path")]
         public string BackdropURL { get; set; }
 
         //Many-to-many relation to Genre
-        public virtual ICollection<Genre> Genres { get; set; }
+        public virtual ICollection<ItemGenre> ItemGenres { get; set; }
 
         //Many-to-many relation to CastMember
         public virtual ICollection<ItemCastMember> ItemCastMembers { get; set; }

@@ -21,7 +21,7 @@ namespace Subvault_UI.Controllers {
         public ViewResult Detail(int id) {
             MovieViewModel movie = movieManager.GetMovieById(id);
 
-            return View(movie);
+            return View("~/Views/Item/Detail.cshtml", movie);
         }
     }
 }

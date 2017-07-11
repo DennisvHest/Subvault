@@ -1,0 +1,53 @@
+﻿@using Subvault_Domain
+@using System.Web.UI.WebControls
+@using System.Web.Mvc
+
+@model IEnumerable<Subvault_Domain.Entities.Subtitles>
+
+@{
+    var listItems = new List<ListItem>();
+    listItems.Add(new ListItem { Text = "All languages", Value = "all", Selected = true });
+    foreach (KeyValuePair<string, string> language in Subvault_Domain.GlobalSettings.LanguageCodes) {
+        listItems.Add(new ListItem { Text = language.Value, Value = language.Key });
+    }
+}
+
+<div id="subtitles-list" class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+    <div class="col-xs-12"><h4>Subtitles</h4></div>
+    <div id="subtitles-table">
+        @Html.DropDownList("language-select", new SelectList(listItems, "Value", "Text"))
+        <table>
+            <thead>
+                <tr>
+                    <td class="sort hidden" data-sort="language"></td>
+                    <td class="sort" data-sort="language-icon"><div class="tooltip"><i class="fa fa-flag" aria-hidden="true"></i><span class="tooltiptext">Language</span></div></td>
+                    <td class="sort" data-sort="file-name">Name</td>
+                    <td class="sort" data-sort="synced-with">Synced with</td>
+                    <td class="sort" data-sort="hearing-impaired"><div class="tooltip"><i class="fa fa-deaf" aria-hidden="true"></i><span class="tooltiptext">For hearing impaired</span></div></td>
+                    <td class="sort" data-sort="foreign-only"><div class="tooltip"><i class="fa fa-globe" aria-hidden="true"></i><span class="tooltiptext">Foreign speech only</span></div></td>
+                    <td class="sort" data-sort="uploader">Uploader</td>
+                    <td class="sort" data-sort="download-button"></td>
+                </tr>
+            </thead>
+            <tbody class="list">
+                @if (Model != null && Model.Count() != 0) {
+                    foreach (Subvault_Domain.Entities.Subtitles subtitles in Model) {
+                        <tr>
+                            <td class="language hidden">@subtitles.Language</td>
+                            <td class="language-icon" value="@subtitles.Language"><img src="~/Content/flags/4x3/@(subtitles.Language).svg" title="@GlobalSettings.LanguageCodes[subtitles.Language]" /></td>
+                            <td class="file-name">@subtitles.FileName</td>
+                            <td class="synced-with">@subtitles.SyncType</td>
+                            <td class="hearing-impaired">@if (subtitles.ForHearingImpaired) { <i class="fa fa-check" aria-hidden="true"></i> }</td>
+                            <td class="foreign-only">@if (subtitles.IsForeignOnly) { <i class="fa fa-check" aria-hidden="true"></i> }</td>
+                            <td class="uploader">@subtitles.Uploader.Username</td>
+                            <td class="download-button"><a href="@Url.Action("Download", "Subtitles", new { filePath = subtitles.FilePath, fileName = subtitles.FileName })"><button type="submit" class="green-button"><i class="fa fa-download" aria-hidden="true"></i></button></a></td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+        @if (Model == null || Model.Count() == 0) {
+            <p class="no-subs">No subtitles available for this movie... Yet...</p>
+        }
+    </div>
+</div>

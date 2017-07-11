@@ -3,7 +3,7 @@ using Subvault_Domain.Entities;
 
 namespace Subvault_Domain.ObjectMappers {
 
-    public class APIMovieMapper {
+    public class APISeriesMapper {
 
         /// <author>Dennis van Hest</author>
         /// <summary>
@@ -11,11 +11,11 @@ namespace Subvault_Domain.ObjectMappers {
         /// </summary>
         /// <param name="movieResult">The movie result from the API</param>
         /// <returns>A Movie object</returns>
-        public Movie mapMovie(PopularMovieResult movieResult) {
-            return new Movie {
+        public Series mapMovie(PopularSeriesResult movieResult) {
+            return new Series {
                 Id = movieResult.id,
-                Title = movieResult.title,
-                PosterURL = movieResult.poster_path
+                Title = movieResult.name,
+                PosterPath = movieResult.poster_path
             };
         }
     }

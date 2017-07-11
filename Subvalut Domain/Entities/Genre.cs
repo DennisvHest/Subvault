@@ -11,6 +11,6 @@ namespace Subvault_Domain.Entities {
         public string Name { get; set; }
 
         //Many-to-may relation to Item
-        public virtual ICollection<Item> Items { get; set; }
+        public virtual ICollection<ItemGenre> ItemGenres { get; set; }
     }
 }
