@@ -50,6 +50,15 @@ namespace Subvault_Domain.Concrete {
             return response;
         }
 
+        public IRestResponse GetSeriesSeasonById(int seriesId, int seasonId) {
+            RestClient client = new RestClient(GlobalSettings.APIRoot + "/tv/" + seriesId + "/season/" + seasonId + "?language=en-US&api_key=" + GlobalSettings.APIKey);
+            RestRequest request = new RestRequest(Method.GET);
+
+            IRestResponse response = client.Execute(request);
+
+            return response;
+        }
+
         public IRestResponse GetCreditsByMovieId(int id) {
             RestClient client = new RestClient(GlobalSettings.APIRoot + "/movie/" + id + "/credits?api_key=" + GlobalSettings.APIKey);
             RestRequest request = new RestRequest(Method.GET);

@@ -23,22 +23,39 @@ namespace Subvault_UI.Controllers {
         /// <returns>The view</returns>
         [HttpGet]
         [UserLoggedIn]
-        public ViewResult Upload() {
-            return View();
+        public ViewResult UploadForMovie() {
+            ViewBag.Type = "Movie";
+            return View("Upload");
         }
+
+        [HttpGet]
+        [UserLoggedIn]
+        public ViewResult UploadForSeries() {
+            ViewBag.Type = "Series";
+            return View("Upload");
+        }
+
 
         /// <author>Dennis van Hest</author>
         /// <summary>
         /// Catches the request to upload subtitles
         /// </summary>
         /// <param name="subtitles">Subtitles data</param>
-        /// <param name="movieId">The id of the movie the subtitles belong to</param>
+        /// <param name="itemId">The id of the movie the subtitles belong to</param>
         /// <param name="file">The subtitles file</param>
         /// <returns>Redirects to the homepage</returns>
         [HttpPost]
         [UserLoggedIn]
-        public ActionResult Upload(Subtitles subtitles, int movieId, HttpPostedFileBase file) {
-            SubtitlesManager.Upload(subtitles, movieId, file);
+        public ActionResult UploadForMovie(Subtitles subtitles, int itemId, HttpPostedFileBase file) {
+            SubtitlesManager.UploadForMovie(subtitles, itemId, file);
+            TempData["upload-success"] = true;
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpPost]
+        [UserLoggedIn]
+        public ActionResult UploadForSeries(Subtitles subtitles, int itemId, int episodeId, HttpPostedFileBase file) {
+            SubtitlesManager.UploadForSeries(subtitles, itemId, episodeId, file);
             TempData["upload-success"] = true;
             return RedirectToAction("Index", "Home");
         }

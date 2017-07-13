@@ -20,8 +20,13 @@ namespace Subvault_UI.Controllers {
         /// <param name="query">The query</param>
         /// <returns>A list of ItemAPIModels</returns>
         [HttpGet]
-        public ItemAPIModel[] Search(string query) {
-            return itemManager.Search(query).ToArray();
+        public ItemAPIModel[] SearchMovies(string query) {
+            return itemManager.SearchMovies(query).ToArray();
+        }
+
+        [HttpGet]
+        public SeriesAPIModel[] SearchSeries(string query) {
+            return itemManager.SearchSeries(query).ToArray();
         }
     }
 }

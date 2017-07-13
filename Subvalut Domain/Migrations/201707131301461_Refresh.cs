@@ -115,7 +115,7 @@ namespace Subvault_Domain.Migrations
                 "dbo.Episodes",
                 c => new
                     {
-                        Id = c.Int(nullable: false, identity: true),
+                        Id = c.Int(nullable: false),
                         EpisodeNumber = c.Int(nullable: false),
                         Name = c.String(),
                         Overview = c.String(),
@@ -131,7 +131,7 @@ namespace Subvault_Domain.Migrations
                 "dbo.Seasons",
                 c => new
                     {
-                        Id = c.Int(nullable: false, identity: true),
+                        Id = c.Int(nullable: false),
                         SeasonNumber = c.Int(nullable: false),
                         Name = c.String(),
                         Overview = c.String(),

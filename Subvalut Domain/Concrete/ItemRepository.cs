@@ -36,9 +36,16 @@ namespace Subvault_Domain.Concrete {
         /// </summary>
         /// <param name="title">Title of the item</param>
         /// <returns>List of Items</returns>
-        public IEnumerable<Item> SearchItemsByTitle(string title) {
-            return context.Items
-                .Where(i => i.Title.Contains(title));
+        public IEnumerable<Movie> SearchMoviesByTitle(string title) {
+            return context.Movies
+                .Where(i => i.Title.Contains(title))
+                .ToList();
+        }
+
+        public IEnumerable<Series> SearchSeriesByTitle(string title) {
+            return context.Series
+                .Where(s => s.Title.Contains(title))
+                .ToList();
         }
 
         /// <summary>

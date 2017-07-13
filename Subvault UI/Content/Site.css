@@ -412,7 +412,7 @@ input, #search-area button, #upload-search-button {
 
 /* Item box */
 .item-box {
-    width: 185px;
+    width: 187px;
     height: 382px;
     clear: none;
     margin: 20px;
@@ -537,7 +537,7 @@ input, #search-area button, #upload-search-button {
     height: 100%;
 }
 
-#subtitle-upload, #meta-data-area {
+#subtitle-upload, #meta-data-area, #season-select-area, #episode-select-area {
     display: none;
     float: right;
 }

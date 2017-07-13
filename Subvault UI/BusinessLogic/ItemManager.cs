@@ -234,6 +234,17 @@ namespace Subvault_UI.BusinessLogic {
                     );
             }
 
+            series.Seasons = new List<Season>();
+
+            for (int seasonNr = 1; seasonNr <= apiSeries.NumberOfSeasons; seasonNr++) {
+                IRestResponse seasonResponse = itemApiRepo.GetSeriesSeasonById(id, seasonNr);
+
+                //Convert the response to a movie object
+                Season season = JsonConvert.DeserializeObject<Season>(seasonResponse.Content);
+
+                series.Seasons.Add(season);
+            }
+
             return series;
         }
 
@@ -260,22 +271,63 @@ namespace Subvault_UI.BusinessLogic {
         /// </summary>
         /// <param name="query">Title of the item</param>
         /// <returns>The list of ItemAPIModels</returns>
-        public IEnumerable<ItemAPIModel> Search(string query) {
+        public IEnumerable<ItemAPIModel> SearchMovies(string query) {
             List<ItemAPIModel> itemList = new List<ItemAPIModel>();
 
-            IEnumerable<Item> result = itemRepo.SearchItemsByTitle(query);
+            IEnumerable<Movie> result = itemRepo.SearchMoviesByTitle(query);
 
-            foreach (Item item in result) {
+            foreach (Movie movie in result) {
                 ItemAPIModel itemApiModel = new ItemAPIModel {
-                    Id = item.Id,
-                    Title = item.Title,
-                    PosterURL = item.PosterPath
+                    Id = movie.Id,
+                    Title = movie.Title,
+                    PosterURL = movie.PosterPath
                 };
 
                 itemList.Add(itemApiModel);
             }
 
             return itemList;
+        }
+
+        public IEnumerable<SeriesAPIModel> SearchSeries(string query) {
+            List<SeriesAPIModel> seriesList = new List<SeriesAPIModel>();
+
+            IEnumerable<Series> result = itemRepo.SearchSeriesByTitle(query);
+
+            foreach (Series series in result) {
+                SeriesAPIModel seriesApiModel = new SeriesAPIModel {
+                    Id = series.Id,
+                    Title = series.Title,
+                    PosterURL = series.PosterPath
+                };
+
+                seriesApiModel.Seasons = new List<SeasonAPIModel>();
+
+                foreach (Season season in series.Seasons) {
+                    SeasonAPIModel seasonApiModel = new SeasonAPIModel {
+                        Id = season.Id,
+                        SeasonNumber = season.SeasonNumber
+                    };
+
+                    seasonApiModel.Episodes = new List<EpisodeAPIModel>();
+
+                    foreach (Episode episode in season.Episodes) {
+                        EpisodeAPIModel episodeApiModel = new EpisodeAPIModel {
+                            Id = episode.Id,
+                            EpisodeNumber = episode.EpisodeNumber,
+                            Name = episode.Name
+                        };
+
+                        seasonApiModel.Episodes.Add(episodeApiModel);
+                    }
+
+                    seriesApiModel.Seasons.Add(seasonApiModel);
+                }
+
+                seriesList.Add(seriesApiModel);
+            }
+
+            return seriesList;
         }
     }
 }

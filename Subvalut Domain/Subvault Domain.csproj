@@ -100,9 +100,9 @@
     <Compile Include="Exceptions\UserAlreadyExistsException.cs" />
     <Compile Include="Exceptions\UserDoesNotExistException.cs" />
     <Compile Include="GlobalSettings.cs" />
-    <Compile Include="Migrations\201707101351276_Refresh.cs" />
-    <Compile Include="Migrations\201707101351276_Refresh.Designer.cs">
-      <DependentUpon>201707101351276_Refresh.cs</DependentUpon>
+    <Compile Include="Migrations\201707131301461_Refresh.cs" />
+    <Compile Include="Migrations\201707131301461_Refresh.Designer.cs">
+      <DependentUpon>201707131301461_Refresh.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ObjectMappers\APISeriesMapper.cs" />
@@ -113,8 +113,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201707101351276_Refresh.resx">
-      <DependentUpon>201707101351276_Refresh.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201707131301461_Refresh.resx">
+      <DependentUpon>201707131301461_Refresh.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

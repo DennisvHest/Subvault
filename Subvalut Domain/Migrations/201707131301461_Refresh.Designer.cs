@@ -13,7 +13,7 @@ namespace Subvault_Domain.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201707101351276_Refresh"; }
+            get { return "201707131301461_Refresh"; }
         }
         
         string IMigrationMetadata.Source

@@ -4,6 +4,7 @@ namespace Subvault_Domain.Abstract {
 
     public interface ISubtitlesRepository {
 
-        void CreateSubtitles(Subtitles subtitles);
+        void CreateSubtitlesForMovie(Subtitles subtitles);
+        void CreateSubtitlesForSeries(Subtitles subtitles);
     }
 }

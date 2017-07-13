@@ -25,6 +25,18 @@ namespace Subvault_UI {
             );
 
             routes.MapRoute(
+               name: null,
+               url: "Movie/Subtitles/Upload",
+               defaults: new { controller = "Subtitles", action = "UploadForMovie" }
+            );
+
+            routes.MapRoute(
+               name: null,
+               url: "Series/Subtitles/Upload",
+               defaults: new { controller = "Subtitles", action = "UploadForSeries" }
+            );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }

@@ -10,25 +10,41 @@
     foreach (KeyValuePair<string, string> language in Subvault_Domain.GlobalSettings.LanguageCodes) {
         listItems.Add(new ListItem { Text = language.Value, Value = language.Key });
     }
+
+    string action = "UploadFor" + ViewBag.Type;
 }
 
 <div id="upload-area" class="col-md-12 col-lg-10 col-lg-offset-1 col-xl-8 col-xl-offset-2">
-    @using (Html.BeginForm("Upload", "Subtitles", FormMethod.Post, new { enctype = "multipart/form-data", @onkeypress = "return event.keyCode != 13;" })) {
+    @using (Html.BeginForm(action, "Subtitles", FormMethod.Post, new { enctype = "multipart/form-data", @onkeypress = "return event.keyCode != 13;" })) {
         <div id="item-select" class="upload-step col-xs-12 col-md-7">
-            <h3><div class="step-number">1</div>Select a movie or series</h3>
-            <input id="upload-search-input" type="text" placeholder="Search a movie or series..." />
+            <h3><div class="step-number">1</div>Select a @(((String)ViewBag.Type).ToLower())</h3>
+            <input id="upload-search-input" type="text" placeholder="Search a @(((String)ViewBag.Type).ToLower())..." />
             <button id="upload-search-button" type="button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
 
             <div id="upload-search-results"></div>
-            @Html.Hidden("movieId")
+            @Html.Hidden("itemId")
+
+            @if (ViewBag.Type == "Series") {
+                @Html.Hidden("episodeId")
+            }
         </div>
+        if (ViewBag.Type == "Series") {
+            <div id="season-select-area" class="upload-step col-xs-12 col-md-5">
+                <h3><div class="step-number"></div>Select season</h3>
+                <select id="season-select"></select>
+            </div>
+            <div id="episode-select-area" class="upload-step col-xs-12 col-md-5">
+                <h3><div class="step-number"></div>Select episode</h3>
+                <select id="episode-select"></select>
+            </div>
+        }
         <div id="subtitle-upload" class="upload-step col-xs-12 col-md-5">
-            <h3><div class="step-number">2</div>Upload subtitles</h3>
+            <h3><div class="step-number"></div>Upload subtitles</h3>
             <input id="subtitles-input" type="file" name="file" accept=".srt">
             <label for="subtitles-input">Choose a file...</label>
         </div>
         <div id="meta-data-area" class="upload-step col-xs-12 col-md-5">
-            <h3><div class="step-number">3</div>Specify additional information</h3>
+            <h3><div class="step-number"></div>Specify additional information</h3>
             <label class="sub-spec-label">Language</label>
             @Html.DropDownListFor(s => s.Language, new SelectList(listItems, "Value", "Text"))
             <label class="sub-spec-label">Synced with</label>
@@ -61,4 +77,4 @@
     }
 </div>
 
-<script src="~/Scripts/upload.js"></script>
+<script id="upload-script" src="~/Scripts/upload.js" data-type="@ViewBag.Type"></script>

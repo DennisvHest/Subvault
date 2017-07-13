@@ -21,6 +21,9 @@ namespace Subvault_Domain.APIEntities {
         [JsonProperty("backdrop_path")]
         public string BackdropPath { get; set; }
 
+        [JsonProperty("number_of_seasons")]
+        public int NumberOfSeasons { get; set; }
+
         //Many-to-many relation to Genre
         public virtual ICollection<Genre> Genres { get; set; }
     }

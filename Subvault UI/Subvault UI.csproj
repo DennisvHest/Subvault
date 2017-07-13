@@ -215,6 +215,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
+    <Compile Include="Models\EpisodeAPIModel.cs" />
     <Compile Include="Models\IndexViewModel.cs" />
     <Compile Include="Models\ItemAPIModel.cs" />
     <Compile Include="Models\ItemViewModel.cs" />
@@ -223,6 +224,8 @@
     <Compile Include="Models\RegisteringUser.cs" />
     <Compile Include="Models\SearchQuery.cs" />
     <Compile Include="Models\SearchResultsViewModel.cs" />
+    <Compile Include="Models\SeasonAPIModel.cs" />
+    <Compile Include="Models\SeriesAPIModel.cs" />
     <Compile Include="Models\SeriesViewModel.cs" />
     <Compile Include="Models\SubtitlesUploadViewModel.cs" />
     <Compile Include="Models\UserSessionViewModel.cs" />
