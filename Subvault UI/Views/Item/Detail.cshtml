@@ -11,6 +11,7 @@
 @section Scripts {
     <script src="~/Scripts/list.js"></script>
     <script src="~/Scripts/subtitles-list.js"></script>
+    <script src="~/Scripts/seasons-list.js"></script>
 }
 
 <style>
@@ -26,15 +27,36 @@
         } else {
             <img src="~/Content/img/img-not-available.png" />
         }
-        <h1>@Model.Title</h1>
+        <h1>
+            @Model.Title
+            @if (ViewBag.Season != null) {
+                <br />
+                <span>
+                    Season
+                    @(((Subvault_UI.Models.SeriesViewModel)Model).Seasons.ToArray()[0].SeasonNumber)
+                    @if (ViewBag.Episode != null) {
+                        @: Episode
+                        @(((Subvault_UI.Models.SeriesViewModel)Model).Seasons.ToList().FirstOrDefault().Episodes.ToArray()[0].EpisodeNumber)
+                    }
+                </span>
+            }
+        </h1>
     </div>
     <div id="backdrop-gradient"></div>
 
-    @if (Model is Subvault_UI.Models.MovieViewModel) {
-        IEnumerable<Subvault_Domain.Entities.Subtitles> subtitles = ((Subvault_UI.Models.MovieViewModel)Model).Subtitles;
-        @Html.Partial("_MovieSubtitlesList", subtitles)
+    @if (Model is Subvault_UI.Models.MovieViewModel || ViewBag.Episode != null) {
+        if (ViewBag.Episode != null) {
+            @Html.Partial("_MovieSubtitlesList", ((Subvault_UI.Models.SeriesViewModel)Model).Seasons.ToList().FirstOrDefault().Episodes.ToArray()[0].Subtitles)
+        } else {
+            @Html.Partial("_MovieSubtitlesList", ((Subvault_UI.Models.MovieViewModel)Model).Subtitles)
+        }
+
     } else {
-        <div id="episodes-list"></div>
+        if (ViewBag.Season != null) {
+            @Html.Partial("_SeasonEpisodesList", ((Subvault_UI.Models.SeriesViewModel)Model).Seasons.ToArray()[0].Episodes)
+        } else {
+            @Html.Partial("_SeriesSeasonsList", ((Subvault_UI.Models.SeriesViewModel)Model).Seasons)
+        }
     }
 
     <div id="item-detail-box" class="col-xs-12">
@@ -57,33 +79,33 @@
                     <b>Genres</b>
                     <p>
                         @for (int i = 0; i < Model.Genres.Count(); i++) {
-                                if (Model.Genres.Count() == 1 || i == Model.Genres.Count() - 1) {
-                                    @Html.Raw(Model.Genres.ToArray()[i].Name)
-                                } else {
-                                    @Html.Raw(Model.Genres.ToArray()[i].Name + ", ")
-                                }
+                            if (Model.Genres.Count() == 1 || i == Model.Genres.Count() - 1) {
+                                @Html.Raw(Model.Genres.ToArray()[i].Name)
+                            } else {
+                                @Html.Raw(Model.Genres.ToArray()[i].Name + ", ")
                             }
+                        }
                     </p>
                 </div>
                 <div class="col-xs-12col-md-6 col-lg-4">
                     <b>Directed by</b>
                     <p>
                         @for (int i = 0; i < Model.Directors.Count(); i++) {
-                                if (Model.Directors.Count() == 1 || i == Model.Directors.Count() - 1) {
-                                    @Html.Raw(Model.Directors.ToArray()[i].Name)
-                                } else {
-                                    @Html.Raw(Model.Directors.ToArray()[i].Name + ", ")
-                                }
+                            if (Model.Directors.Count() == 1 || i == Model.Directors.Count() - 1) {
+                                @Html.Raw(Model.Directors.ToArray()[i].Name)
+                            } else {
+                                @Html.Raw(Model.Directors.ToArray()[i].Name + ", ")
                             }
+                        }
                     </p>
                 </div>
                 <div class="col-xs-12 col-md-6 col-xs-12">
                     <b>Cast</b>
                     <p>
                         @foreach (Subvault_Domain.Entities.CastMember castMember in Model.CastMembers) {
-                                @Html.Raw(castMember.Name + ", ")
-                            }
-                            ...
+                            @Html.Raw(castMember.Name + ", ")
+                        }
+                        ...
                     </p>
                 </div>
             </div>

@@ -223,6 +223,35 @@ input:-webkit-autofill:active {
     transform: translate(-50%,-50%);
 }
 
+table {
+    width: 100%;
+}
+
+table td {
+    padding: 5px 0;
+}
+
+table tr {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+table tbody tr:last-child {
+    border-bottom: none;
+}
+
+table thead, .episode-head {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+table button {
+    width: 40px;
+    float: right;
+}
+
+table img {
+    width: 20px;
+}
+
 /* Mobile nav */
 #mobile-nav {
     width: 100%;
@@ -695,6 +724,10 @@ input, #search-area button, #upload-search-button {
     z-index: 1;
 }
 
+#item-detail h1 span {
+    font-size: 2vw;
+}
+
 #item-detail-box {
     margin-top: 15px;
 }
@@ -731,35 +764,6 @@ input, #search-area button, #upload-search-button {
     margin: 0px;
 }
 
-#subtitles-list table {
-    width: 100%;
-}
-
-#subtitles-list table td {
-    padding: 5px 0;
-}
-
-#subtitles-list table tr {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-#subtitles-list table tbody tr:last-child {
-    border-bottom: none;
-}
-
-#subtitles-list table thead {
-    color: rgba(255, 255, 255, 0.6);
-}
-
-#subtitles-list table button {
-    width: 40px;
-    float: right;
-}
-
-#subtitles-list table img {
-    width: 20px;
-}
-
 .no-subs {
     text-align: center;
     padding: 50px 0px !important;
@@ -767,8 +771,20 @@ input, #search-area button, #upload-search-button {
 }
 
 /* Episodes list */
-#episodes-list {
+#seasons-list {
     margin-top: 300px;
+}
+
+#seasons-list .fa-chevron-down {
+    float: right;
+}
+
+.episode-list {
+    display: none;
+}
+
+.episode-list tr:first-child {
+    font-weight: bold;
 }
 
 /* Device rules */

@@ -76,6 +76,10 @@ namespace Subvault_UI.BusinessLogic {
             IEnumerable<Genre> genres = movie.ItemGenres.Select(ig => ig.Genre);
             IEnumerable<CrewMember> directors = movie.ItemCrewMembers.Where(ic => ic.Job == "Director").Select(ic => ic.CrewMember).Distinct();
 
+            if (movie.Subtitles == null) {
+                movie.Subtitles = new Subtitles[0];
+            }
+
             return new MovieViewModel {
                 Title = movie.Title,
                 Description = movie.Description,
@@ -89,7 +93,7 @@ namespace Subvault_UI.BusinessLogic {
             };
         }
 
-        public SeriesViewModel GetSeriesById(int id) {
+        public SeriesViewModel GetSeriesById(int id, int? seasonNumber, int? episodeNumber) {
             Series series = itemRepo.GetSeriesById(id);
 
             //If the series is not found in the database, get the series from the API
@@ -102,16 +106,41 @@ namespace Subvault_UI.BusinessLogic {
             IEnumerable<Genre> genres = series.ItemGenres.Select(ig => ig.Genre);
             IEnumerable<CrewMember> directors = series.ItemCrewMembers.Where(ic => ic.Job == "Director").Select(ic => ic.CrewMember).Distinct();
 
-            return new SeriesViewModel {
-                Title = series.Title,
-                Description = series.Description,
-                ReleaseDate = series.ReleaseDate,
-                PosterURL = series.PosterPath,
-                BackdropURL = series.BackdropURL,
-                Genres = genres,
-                CastMembers = castMembers,
-                Directors = directors
-            };
+            SeriesViewModel seriesViewModel = null;
+
+            if (seasonNumber != null) {
+                Season selectedSeason = series.Seasons.Where(s => s.SeasonNumber == seasonNumber).FirstOrDefault();
+
+                if (episodeNumber != null) {
+                    selectedSeason.Episodes = selectedSeason.Episodes.Where(e => e.EpisodeNumber == episodeNumber).ToList();
+                }
+
+                seriesViewModel = new SeriesViewModel {
+                    Title = series.Title,
+                    Description = series.Description,
+                    ReleaseDate = series.ReleaseDate,
+                    PosterURL = selectedSeason.PosterPath,
+                    BackdropURL = series.BackdropURL,
+                    Genres = genres,
+                    CastMembers = castMembers,
+                    Directors = directors,
+                    Seasons = new Season[] { selectedSeason }
+                };
+            } else {
+                seriesViewModel = new SeriesViewModel {
+                    Title = series.Title,
+                    Description = series.Description,
+                    ReleaseDate = series.ReleaseDate,
+                    PosterURL = series.PosterPath,
+                    BackdropURL = series.BackdropURL,
+                    Genres = genres,
+                    CastMembers = castMembers,
+                    Directors = directors,
+                    Seasons = series.Seasons
+                };
+            }
+
+            return seriesViewModel;
         }
 
         /// <summary>

@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using Microsoft.ApplicationInsights.Extensibility;
+using System.Diagnostics;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Routing;
@@ -12,6 +10,7 @@ namespace Subvault_UI
     {
         protected void Application_Start()
         {
+            DisableApplicationInsightsOnDebug();
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
@@ -19,6 +18,14 @@ namespace Subvault_UI
                 .ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             GlobalConfiguration.Configuration.Formatters
                 .Remove(GlobalConfiguration.Configuration.Formatters.XmlFormatter);
+        }
+
+        /// <summary>
+        /// Disables the application insights locally.
+        /// </summary>
+        [Conditional("DEBUG")]
+        private static void DisableApplicationInsightsOnDebug() {
+            TelemetryConfiguration.Active.DisableTelemetry = true;
         }
     }
 }

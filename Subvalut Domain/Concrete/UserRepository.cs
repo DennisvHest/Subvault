@@ -19,6 +19,8 @@ namespace Subvault_Domain.Concrete {
         /// <param name="username">The username of the user</param>
         /// <returns>The User object</returns>
         public User GetUser(string username) {
+            Logger.Log.InfoFormat(Logger.Format + "Getting user with username: " + username + " from the database", GetType().ToString());
+
             return context.Users
                 .Where(u => u.Username == username)
                 .FirstOrDefault();
@@ -31,6 +33,8 @@ namespace Subvault_Domain.Concrete {
         /// <param name="username">The username of the user</param>
         /// <returns>The hashed password</returns>
         public string GetHashedPassword(string username) {
+            Logger.Log.InfoFormat(Logger.Format + "Getting the hashed password for the user with username: " + username + " from the database", GetType().ToString());
+
             return context.Users
                 .Where(u => u.Username == username)
                 .Select(u => u.HashedPassword)
@@ -44,6 +48,8 @@ namespace Subvault_Domain.Concrete {
         /// <param name="username">The username of the user</param>
         /// <returns>The salt</returns>
         public string GetSalt(string username) {
+            Logger.Log.InfoFormat(Logger.Format + "Getting the salt from the user with username: " + username + " from the database", GetType().ToString());
+
             return context.Users
                 .Where(u => u.Username == username)
                 .Select(u => u.Salt)
@@ -55,6 +61,8 @@ namespace Subvault_Domain.Concrete {
         /// </summary>
         /// <param name="user">The user</param>
         public void CreateUser(User user) {
+            Logger.Log.InfoFormat(Logger.Format + "Adding user with username: " + user.Username + " to the database", GetType().ToString());
+
             context.Users.Add(user);
             context.SaveChanges();
         }
@@ -66,6 +74,8 @@ namespace Subvault_Domain.Concrete {
         /// <param name="username">The username of the user</param>
         /// <returns>A boolean value (true = user exists, false = user does not exist)</returns>
         public bool UserExists(string username) {
+            Logger.Log.InfoFormat(Logger.Format + "Checking if user with username: " + username + " exists in the database", GetType().ToString());
+
             return context.Users
                 .Where(u => u.Username == username)
                 .Count() != 0;

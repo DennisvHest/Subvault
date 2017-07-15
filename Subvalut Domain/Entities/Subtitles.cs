@@ -18,5 +18,16 @@
 
         //One-to-many relation to Episode
         public virtual Episode Episode { get; set; }
+
+        public string ToString() {
+            return "[ Id = " + Id 
+                + ", Language = " + Language 
+                + ", SyncType = " + SyncType 
+                + ", ForHearingImpaired = " + ForHearingImpaired 
+                + ", IsForeignOnly = " + IsForeignOnly 
+                + ", FileName = " + FileName 
+                + ", FilePath = " + FilePath 
+                + " ]";
+        }
     }
 }

@@ -1,6 +1,6 @@
 ﻿$(document).ready(function () {
     var options = {
-        valueNames: ['language', 'languabe-icon', 'file-name', 'synced-with', 'hearing-impaired', 'foreign-only', 'uploader', 'download-button']
+        valueNames: ['language', 'language-icon', 'file-name', 'synced-with', 'hearing-impaired', 'foreign-only', 'uploader', 'download-button']
     };
 
     var subtitlesList = new List('subtitles-table', options);
@@ -30,7 +30,7 @@
 
             $.each(selectedLanguages, function (index, value) {
                 if (item.values().language == value) {
-                     found = true;
+                    found = true;
                 }
             });
 
@@ -43,7 +43,7 @@
 
         if (selectedLanguage == "all") {
             subtitlesList.filter();
-        } else if(selectedLanguage == "selected-languages") {
+        } else if (selectedLanguage == "selected-languages") {
             subtitlesList.filter(function (item) {
                 var found = false;
 

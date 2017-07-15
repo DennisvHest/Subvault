@@ -21,11 +21,15 @@ namespace Subvault_Domain.Concrete {
         /// <param name="id">The id of the movie</param>
         /// <returns>A Movie with the given id</returns>
         public Movie GetMovieById(int id) {
+            Logger.Log.InfoFormat(Logger.Format + "Getting movie with id: " + id + " from the database", GetType().ToString());
+
             return (Movie)context.Items
                 .Where(m => m.Id == id).FirstOrDefault();
         }
 
         public Series GetSeriesById(int id) {
+            Logger.Log.InfoFormat(Logger.Format + "Getting series with id: " + id + " from the database", GetType().ToString());
+
             return (Series)context.Items
                 .Where(s => s.Id == id).FirstOrDefault();
         }
@@ -37,12 +41,16 @@ namespace Subvault_Domain.Concrete {
         /// <param name="title">Title of the item</param>
         /// <returns>List of Items</returns>
         public IEnumerable<Movie> SearchMoviesByTitle(string title) {
+            Logger.Log.InfoFormat(Logger.Format + "Getting movie with title containing: " + title + " from the database", GetType().ToString());
+
             return context.Movies
                 .Where(i => i.Title.Contains(title))
                 .ToList();
         }
 
         public IEnumerable<Series> SearchSeriesByTitle(string title) {
+            Logger.Log.InfoFormat(Logger.Format + "Getting series with title containing: " + title + " from the database", GetType().ToString());
+
             return context.Series
                 .Where(s => s.Title.Contains(title))
                 .ToList();
@@ -53,6 +61,8 @@ namespace Subvault_Domain.Concrete {
         /// </summary>
         /// <param name="item">Item to be inserted into the database</param>
         public void InsertItem(Item item) {
+            Logger.Log.InfoFormat(Logger.Format + "Inserting item with id: " + item.Id + " into the database", GetType().ToString());
+
             //Remove existing Genres
             List<ItemGenre> existingGenres = context.ItemGenres.Include(ig => ig.Genre).ToList();
 

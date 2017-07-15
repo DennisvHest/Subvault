@@ -18,6 +18,8 @@ namespace Subvault_Domain.Concrete {
         /// </summary>
         /// <param name="subtitles">The subtitles</param>
         public void CreateSubtitlesForMovie(Subtitles subtitles) {
+            Logger.Log.InfoFormat(Logger.Format + "Inserting movie subtitles with filePath: " + subtitles.FilePath + " into the database", GetType().ToString());
+
             Item item = context.Items.SingleOrDefault(i => i.Id == subtitles.Movie.Id);
             User user = context.Users.SingleOrDefault(u => u.Username == subtitles.Uploader.Username);
 
@@ -32,6 +34,8 @@ namespace Subvault_Domain.Concrete {
         }
 
         public void CreateSubtitlesForSeries(Subtitles subtitles) {
+            Logger.Log.InfoFormat(Logger.Format + "Inserting series subtitles with filePath: " + subtitles.FilePath + " into the database", GetType().ToString());
+
             Episode episode = context.Episodes.SingleOrDefault(i => i.Id == subtitles.Episode.Id);
             User user = context.Users.SingleOrDefault(u => u.Username == subtitles.Uploader.Username);
 

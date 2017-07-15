@@ -1,0 +1,29 @@
+﻿@model IEnumerable<Subvault_Domain.Entities.Season>
+
+<div id="seasons-list" class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+    <h4>Seasons</h4>
+    <table>
+        <thead>
+            <tr>
+                <td>#</td>
+                <td>Name</td>
+                <td>Air date</td>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Subvault_Domain.Entities.Season season in Model) {
+                <tr>
+                    <td>@season.SeasonNumber</td>
+                    <td>@season.Name</td>
+                    @if (season.AirDate != null) {
+                        <td>@season.AirDate.Value.ToString("MM-dd-yyyy")</td>
+                    } else {
+                        <td>No air date</td>
+                    }
+                    <td><a href="/Series/@(season.Series.Id)/Season/@(season.SeasonNumber)"><button class="green-button"><i class="fa fa-chevron-right" aria-hidden="true"></i></button></a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

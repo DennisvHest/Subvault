@@ -17,5 +17,11 @@ namespace Subvault_UI.Models {
         [Required(ErrorMessage = "Please enter an email address.")]
         [EmailAddress(ErrorMessage = "Please enter a valid email address.")]
         public string EmailAddress { get; set; }
+
+        public string ToString() {
+            return "[ Username = " + Username
+                + ", EmailAddress = " + EmailAddress
+                + " ]";
+        }
     }
 }

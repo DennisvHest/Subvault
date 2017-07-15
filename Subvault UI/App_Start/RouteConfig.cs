@@ -20,6 +20,18 @@ namespace Subvault_UI {
 
             routes.MapRoute(
                 name: null,
+                url: "Series/{id}/Season/{seasonNumber}",
+                defaults: new { controller = "Series", action = "Detail" }
+            );
+
+            routes.MapRoute(
+                name: null,
+                url: "Series/{id}/Season/{seasonNumber}/Episode/{episodeNumber}",
+                defaults: new { controller = "Series", action = "Detail" }
+            );
+
+            routes.MapRoute(
+                name: null,
                 url: "Series",
                 defaults: new { controller = "Home", action = "SeriesIndex" }
             );
